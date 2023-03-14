@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-//это заглушка
+// это заглушка
 const rowData = `function App() {}
   
   export default App;`;
 
 export function Typing() {
-  //в стейт нужно передавать данные с сервера/stor'a
+  // в стейт нужно передавать данные с сервера/stor'a
   const [data, setData] = useState(
     rowData.replace(/\s+/g, " ").trim().split("")
   );
@@ -22,6 +22,7 @@ export function Typing() {
 
   return (
     <div>
+        <h1>Кликни на функцию и пиши</h1>
       <div tabIndex={0} onKeyDown={handleKeyDown}>
         <h2>{data}</h2>
       </div>
