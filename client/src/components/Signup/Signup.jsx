@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { useNavigate } from 'react-router-dom';
 import ATYPES from '../../store/types';
 
-export default function Signup() {
+export function Signup() {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const isAuth = useSelector((state) => state.isAuth);
