@@ -8,4 +8,4 @@ const PORT = 3000; // задаем порт в переменную
 
 app.listen(PORT, () => { console.log(`server started on http://localhost:${PORT}`); }); // - проверяем работает ли сервер
 
-app.get('/', (req, res) => { res.send('Server works!!!'); }); // - проверяем эндпоинт на главной странице;
+app.get('/main', (req, res) => { res.send('Server works!!!'); }); // - проверяем эндпоинт на главной странице;
