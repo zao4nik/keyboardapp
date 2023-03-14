@@ -1,3 +1,4 @@
 import { Typing } from './Typing/Typing';
-
-export {Typing}
+import { Signin } from './Signin/Signin';
+import { Signup } from './Signup/Signup';
+export {Typing, Signin, Signup}
