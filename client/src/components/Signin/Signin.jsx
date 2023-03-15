@@ -102,7 +102,7 @@ export function Signin() {
           type="submit"
           className="btn btn-dark"
         >
-          Submit
+          Sign In
         </button>
       </form>
     </div>

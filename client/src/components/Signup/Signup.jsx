@@ -133,7 +133,7 @@ export function Signup() {
           type="submit"
           className="btn btn-dark"
         >
-          Submit
+          Sign Up
         </button>
       </form>
     </div>
