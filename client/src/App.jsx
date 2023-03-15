@@ -8,6 +8,7 @@ import GlobalStyles from './components/Global.styles';
 // import components
 import { Typing, Signup, Signin } from './components';
 import Navbar from './components/Navbar/Navbar';
+import Keyboard from './components/Keyboard/Keybord';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/typing" element={<Typing />} />
+          <Route path="/keyboard" element={<Keyboard />} />
           <Route path="/stats" />
         </Routes>
       </BrowserRouter>
