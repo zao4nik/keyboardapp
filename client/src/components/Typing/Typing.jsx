@@ -80,7 +80,7 @@ export function Typing() {
     generateRandomCode().replace(/\s+/g, ' ').trim().split(''),
   );
   const [isHidden, setIsHidden] = useState(false);
-  // const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   const [stats, setStats] = useState({
     rightCount: 0,
     clickCount: 0,
@@ -92,23 +92,24 @@ export function Typing() {
       setIsHidden(true);
     }, 100000);
 
-    // таймер
-    // useEffect(() => {
-    //   const interval = setInterval(() => {
-    //     setSeconds((seconds) => seconds + 1);
-    //   }, 1000);
-    //   return () => clearInterval(interval);
-    // }, []);
-
     return () => {
       clearTimeout(timer);
     };
+  }, []);
+
+  // таймер
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((prevState) => prevState + 1);
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleKeyDown = async (event) => {
     setStats((prevStats) => ({
       ...prevStats,
       clickCount: prevStats.clickCount + 1,
+      timeGame: Number(seconds),
     }));
     const dataForChanging = data;
     console.log('User pressed: ', event.key);
@@ -120,16 +121,19 @@ export function Typing() {
         rightCount: prevStats.rightCount + 1,
       }));
       if (data.length === 0) {
-        setIsHidden(true)
+        setIsHidden(true);
         try {
-          const response = await fetch('http://localhost:3001/game/game_data' , {
+          const response = await fetch('http://localhost:3001/game/game_data', {
             credentials: 'include',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(stats),
-          })
+          });
+
+          const result = await response;
+          console.log(result);
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       }
     }
