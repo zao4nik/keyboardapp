@@ -9,7 +9,7 @@ function generateRandomCode() {
   const length = getRandomInt(5, 10); // длина кода от 5 до 30 символов
 
   for (let i = 0; i < length; i += 1) {
-    const num = getRandomInt(1, 15);
+    const num = getRandomInt(1, 4);
 
     switch (num) {
       case 1:
@@ -80,7 +80,7 @@ export function Typing() {
     generateRandomCode().replace(/\s+/g, ' ').trim().split(''),
   );
   const [isHidden, setIsHidden] = useState(false);
-  const [seconds, setSeconds] = useState(0);
+  // const [seconds, setSeconds] = useState(0);
   const [stats, setStats] = useState({
     rightCount: 0,
     clickCount: 0,
@@ -92,12 +92,13 @@ export function Typing() {
       setIsHidden(true);
     }, 100000);
 
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setSeconds(seconds => seconds + 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    }, []);  
+    // таймер
+    // useEffect(() => {
+    //   const interval = setInterval(() => {
+    //     setSeconds((seconds) => seconds + 1);
+    //   }, 1000);
+    //   return () => clearInterval(interval);
+    // }, []);
 
     return () => {
       clearTimeout(timer);
@@ -105,7 +106,7 @@ export function Typing() {
   }, []);
 
   const handleKeyDown = (event) => {
-    console.log(event);
+   
     setStats((prevStats) => ({
       ...prevStats,
       clickCount: prevStats.clickCount + 1,
@@ -119,19 +120,24 @@ export function Typing() {
         ...prevStats,
         rightCount: prevStats.rightCount + 1,
       }));
+      if (data.length === 0) {
+        setIsHidden(true)
+        console.log(stats)
+      }
+      
+      
     }
   };
-  console.log(stats);
+  // console.log(stats);
 
   return (
     <div>
       <h1>Кликни на функцию и пиши </h1>
-      <span>{seconds}</span>
-      {!isHidden && (
-        <div  tabIndex={0} onKeyDown={handleKeyDown}>
+      {!isHidden ? (
+        <div tabIndex={0} onKeyDown={handleKeyDown}>
           <h2>{data}</h2>
         </div>
-      )}
+      ) : <h2>End!</h2>}
     </div>
   );
 }
