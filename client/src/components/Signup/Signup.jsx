@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ATYPES from '../../store/types';
+import style from './Signup.styles.css';
 
 export function Signup() {
   const dispatch = useDispatch();
@@ -97,12 +98,6 @@ export function Signup() {
               onChange={handleChange}
             />
           </label>
-          <div
-            id="emailHelp"
-            className="form-text"
-          >
-            We&apos;ll never share your email with anyone else.
-          </div>
         </div>
         <div className="mb-3">
           <label
@@ -131,10 +126,16 @@ export function Signup() {
         </div>
         <button
           type="submit"
-          className="btn btn-dark"
+          className={style.button74}
         >
           Sign Up
         </button>
+        <div
+          id="emailHelp"
+          className="form-text"
+        >
+          We&apos;ll never share your email with anyone else.
+        </div>
       </form>
     </div>
   );

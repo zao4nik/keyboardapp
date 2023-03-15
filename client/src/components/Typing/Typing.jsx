@@ -145,6 +145,8 @@ export function Typing() {
     <div>
       <h1>Кликни на функцию и пиши </h1>
       {!isHidden ? (
+        // eslint-disable-next-line max-len
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex
         <div tabIndex={0} onKeyDown={handleKeyDown}>
           <h2>{data}</h2>
         </div>

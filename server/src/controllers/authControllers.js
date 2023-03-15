@@ -39,25 +39,27 @@ const checkUserAndCreateSession = async (req, res) => {
   const { email, password } = req.body;
   // console.log('Авторизация: ===>', req.body);
   try {
+    if (email || password) {
     // Пытаемся найти пользователя в БД
-    const user = await User.findOne({ where: { email }, raw: true });
-    if (!user) return res.status(401).json({ errMsg: 'Неправильное имя/пароль' });
+      const user = await User.findOne({ where: { email }, raw: true });
+      if (!user) return res.status(401).json({ errMsg: 'Неправильное имя/пароль' });
 
-    // Сравниваем хэш в БД с хэшем введённого пароля
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) return res.status(401).json({ errMsg: 'Неправильное пароль/имя' });
+      // Сравниваем хэш в БД с хэшем введённого пароля
+      const isValidPassword = await bcrypt.compare(password, user.password);
+      if (!isValidPassword) return res.status(401).json({ errMsg: 'Неправильное пароль/имя' });
 
-    console.log(
-      `======> Авторизация: Пользователь под login: ${user.email} - успешно авторизовался на сайте!`,
-    );
+      console.log(
+        `======> Авторизация: Пользователь под login: ${user.email} - успешно авторизовался на сайте!`,
+      );
 
-    // записываем в req.session.user при авторизации данные (id & login) (создаем сессию)
-    req.session.user = { id: user.id, email: user.email };
-    console.log(
-      `------>Сессия: Сессия для пользователя: ${user.email} под id в БД: ${user.id} успешно создана!`,
-    );
-    req.session.save();
-    res.status(200).json(user);
+      // записываем в req.session.user при авторизации данные (id & login) (создаем сессию)
+      req.session.user = { id: user.id, email: user.email };
+      console.log(
+        `------>Сессия: Сессия для пользователя: ${user.email} под id в БД: ${user.id} успешно создана!`,
+      );
+      req.session.save();
+      res.status(200).json(user);
+    }
   } catch (err) {
     let errMsg = err.message;
     if (err.name === 'SequelizeUniqueConstraintError') { errMsg = err.errors[0].message; }
