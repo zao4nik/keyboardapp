@@ -1,40 +1,82 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import StyledNavbar from './Navbar.styles';
-// import Dropdown from '../Dropdown/Dropdown';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import ATYPES from '../../store/types';
 
-export default function Navbar() {
-  const user = useSelector((store) => store.user);
-  console.log(user);
+export function Navbar() {
+  const isAuth = useSelector((store) => store.isAuth);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onSignOut = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/auth/signout', {
+        credentials: 'include',
+      });
+      // eslint-disable-next-line no-unused-vars
+      const result = await response.json();
+      dispatch({ type: ATYPES.SIGN_OUT_USER });
+      navigate('/');
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
-    <StyledNavbar>
-      <Link className="navLinks" to="/">
-        <h2>
-          Play
-        </h2>
-      </Link>
+    <main>
+      {isAuth ? (
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar variant="dense">
 
-      {user ? (
-        <Link className="navLinks" to="/stats">
-          <h2>
-            My stats
-          </h2>
-        </Link>
+              <Link className="navLinks" to="/">
+                <Button variant="h6" color="inherit" component="div">
+                  Home
+                </Button>
+              </Link>
+
+              <Link className="navLinks" to="/auth/signout">
+                <Button onClick={onSignOut} variant="h6" color="inherit" component="div">
+                  Sign Out
+                </Button>
+              </Link>
+
+            </Toolbar>
+          </AppBar>
+        </Box>
       ) : (
-        <Link className="navLinks" to="/signup">
-          <h2>
-            Get stats
-          </h2>
-        </Link>
-      )}
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar variant="dense">
 
-      <Link className="navLinks" to="/">
-        <h2>
-          I want to practice...
-        </h2>
-      </Link>
-    </StyledNavbar>
+              <Link className="navLinks" to="/">
+                <Button variant="h6" color="inherit" component="div">
+                  Home
+                </Button>
+              </Link>
+
+              <Link className="navLinks" to="/auth/signup">
+                <Button variant="h6" color="inherit" component="div">
+                  Sign Up
+                </Button>
+              </Link>
+
+              <Link className="navLinks" to="/auth/signin">
+                <Button variant="h6" color="inherit" component="div">
+                  Sign In
+                </Button>
+              </Link>
+
+            </Toolbar>
+          </AppBar>
+        </Box>
+      )}
+    </main>
   );
 }

@@ -77,6 +77,7 @@ export function Typing() {
   // в стейт нужно передавать данные с сервера/stor'a
 
   const [data, setData] = useState(
+    rowData.replace(/\s+/g, ' ').trim().split(''),
     generateRandomCode().replace(/\s+/g, ' ').trim().split(''),
   );
   const [isHidden, setIsHidden] = useState(false);
@@ -112,6 +113,7 @@ export function Typing() {
       timeGame: Number(seconds),
     }));
     const dataForChanging = data;
+    console.log('User pressed: ', event.key);
     console.log('User pressed: ', event.key);
     if (event.key === data[0] && data.length > 0) {
       dataForChanging.shift();

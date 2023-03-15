@@ -68,17 +68,30 @@ const checkUserAndCreateSession = async (req, res) => {
   }
 };
 
+const userInfo = async (req, res) => {
+  const myUser = req.session.user;
+  try {
+    res.json(myUser);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // Удаление сессии
-const destroySession = (req, res) => {
-  req.session.destroy((err) => {
-    if (err) return console.log(err);
+const signOut = async (req, res) => {
+  req.session.destroy((error) => {
+    if (error) {
+      console.error(error);
+      return res.sendStatus(500);
+    }
     res.clearCookie('ArcticFoxesCookie');
-    res.sendStatus(200);
+    return res.json({ status: 200 });
   });
 };
 
 module.exports = {
   createUserAndSession,
   checkUserAndCreateSession,
-  destroySession,
+  signOut,
+  userInfo,
 };
