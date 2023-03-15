@@ -12,6 +12,7 @@ const sessionControl = require('./middlewares/controlSession');
 
 // Импорт роутов:
 const authRouter = require('./routes/auth');
+const gameData = require('./routes/gameData');
 
 const app = express(); // создаём экземпляр сервера
 
@@ -46,5 +47,6 @@ app.use(session(sessionConfig));
 app.use(sessionControl);
 
 app.use('/auth', authRouter);
+app.use('/game', gameData);
 
 app.listen(PORT, () => { console.log(`server started on http://localhost:${PORT}`); }); // - проверяем работает ли сервер
