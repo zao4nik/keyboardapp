@@ -1,7 +1,0 @@
-{
-  "development": {
-    "use_env_variable": "DB_URL_DEV",
-    "host": "DB_HOST",
-    "dialect": "postgres"
-  }
-}
