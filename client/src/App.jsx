@@ -1,17 +1,27 @@
 import './App.css';
-import React from 'react';
-// import { Routes, Route } from 'react-router-dom';
+import * as React from 'react';
+import {
+  BrowserRouter, Routes, Route,
+} from 'react-router-dom';
+import GlobalStyles from './components/Global.styles';
 
-//import components
-import {Typing, Signup, Signin} from './components'
+// import components
+import { Typing, Signup, Signin } from './components';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <div>Hello</div>
-      <Typing></Typing>
-      <Signin />
-      <Signup />
+      <BrowserRouter>
+        <GlobalStyles />
+        <Navbar />
+        <Routes>
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/typing" element={<Typing />} />
+          <Route path="/stats" />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
