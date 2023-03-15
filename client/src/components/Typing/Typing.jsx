@@ -77,7 +77,6 @@ export function Typing() {
   // в стейт нужно передавать данные с сервера/stor'a
 
   const [data, setData] = useState(
-    rowData.replace(/\s+/g, ' ').trim().split(''),
     generateRandomCode().replace(/\s+/g, ' ').trim().split(''),
   );
   const [isHidden, setIsHidden] = useState(false);
