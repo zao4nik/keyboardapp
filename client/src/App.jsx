@@ -9,6 +9,7 @@ import {
   Typing, Signup, Signin, Navbar,
 } from './components';
 import ATYPES from './store/types';
+import Keyboard from './components/Keyboard/Keybord';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
           <Route path="/auth/signup" element={<Signup />} />
           <Route path="/auth/signout" element={<Signin />} />
           <Route path="/typing" element={<Typing />} />
+          <Route path="/keyboard" element={<Keyboard />} />
           <Route path="/stats" />
         </Routes>
       </BrowserRouter>
