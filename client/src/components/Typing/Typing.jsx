@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 import React, { useEffect, useState } from 'react';
 
 function getRandomInt(min, max) {
@@ -6,7 +9,7 @@ function getRandomInt(min, max) {
 
 function generateRandomCode() {
   let code = '';
-  const length = getRandomInt(5, 10); // длина кода от 5 до 30 символов
+  const length = getRandomInt(5, 6); // длина кода от 5 до 30 символов
 
   for (let i = 0; i < length; i += 1) {
     const num = getRandomInt(1, 4);
