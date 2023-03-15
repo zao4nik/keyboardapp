@@ -1,11 +1,20 @@
-.keyboard {
+.keyboard-container {
     display: flex;
     flex-direction: column;
-    width: 700px;
-    height: 300px;
+    
   }
-  
+  .keyboard{
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-left: 500px;
+    width: 850px;
+    height: 322px;
+    border: 2px solid rgb(0, 5, 5);
+  }
   .row {
+    padding-left: 0;
+    margin: 0;
     list-style: none;
     display: flex;
   }
