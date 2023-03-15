@@ -6,7 +6,9 @@ import {
 import GlobalStyles from './components/Global.styles';
 
 // import components
-import { Typing, Signup, Signin } from './components';
+import {
+  Typing, Signup, Signin, MyStatistics,
+} from './components';
 import Navbar from './components/Navbar/Navbar';
 
 function App() {
@@ -14,12 +16,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <GlobalStyles />
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/typing" element={<Typing />} />
-          <Route path="/stats" />
+          <Route path="/stats" element={<MyStatistics />} />
         </Routes>
       </BrowserRouter>
     </div>
