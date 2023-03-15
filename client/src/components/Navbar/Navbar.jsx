@@ -49,6 +49,12 @@ export function Navbar() {
                   </NavBarButtonsStyled>
                 </Link>
 
+                <Link className="navLinks" to="/game_page">
+                  <NavBarButtonsStyled variant="h6" color="inherit" component="div">
+                    Game Page
+                  </NavBarButtonsStyled>
+                </Link>
+
                 <Link className="navLinks" to="/auth/signout">
                   <NavBarButtonsStyled onClick={onSignOut} variant="h6" color="inherit" component="div">
                     Sign Out
@@ -72,6 +78,12 @@ export function Navbar() {
                 <Link className="navLinks" to="/auth/signup">
                   <NavBarButtonsStyled variant="h6" color="inherit" component="div">
                     Sign Up
+                  </NavBarButtonsStyled>
+                </Link>
+
+                <Link className="navLinks" to="/game_page">
+                  <NavBarButtonsStyled variant="h6" color="inherit" component="div">
+                    Game Page
                   </NavBarButtonsStyled>
                 </Link>
 
