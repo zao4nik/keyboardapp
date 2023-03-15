@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import {
   Typing, Signup, Signin, Navbar, Keyboard,
 } from './components';
+import { GamePage } from './screens';
 import ATYPES from './store/types';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/auth/signout" element={<Signin />} />
           <Route path="/typing" element={<Typing />} />
           <Route path="/keyboard" element={<Keyboard />} />
+          <Route path="/game_page" element={<GamePage />} />
           <Route path="/stats" />
         </Routes>
       </BrowserRouter>
