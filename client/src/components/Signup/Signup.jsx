@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ATYPES from '../../store/types';
 
 export function Signup() {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const isAuth = useSelector((state) => state.isAuth);
   console.log('isAuth: ', isAuth);
 
-  // useEffect(() => {
-  //   if (isAuth) navigate('/');
-  // }, [isAuth]);
+  useEffect(() => {
+    if (isAuth) navigate('/');
+  }, [isAuth]);
 
   const [userSignup, setUserSignup] = useState({ login: '', email: '', password: '' });
   const [errorSignup, setErrorSignup] = useState('');

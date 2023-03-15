@@ -3,21 +3,31 @@ import * as React from 'react';
 import {
   BrowserRouter, Routes, Route,
 } from 'react-router-dom';
-import GlobalStyles from './components/Global.styles';
-
+import { useDispatch } from 'react-redux';
 // import components
-import { Typing, Signup, Signin } from './components';
-import Navbar from './components/Navbar/Navbar';
+import {
+  Typing, Signup, Signin, Navbar,
+} from './components';
+import ATYPES from './store/types';
 
 function App() {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    fetch('http://localhost:3001/auth/userinfo', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((result) => dispatch({ type: ATYPES.SET_USER, payload: result }));
+  }, []);
+
   return (
     <div className="App">
       <BrowserRouter>
-        <GlobalStyles />
         <Navbar />
         <Routes>
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/auth/signin" element={<Signin />} />
+          <Route path="/auth/signup" element={<Signup />} />
+          <Route path="/auth/signout" element={<Signin />} />
           <Route path="/typing" element={<Typing />} />
           <Route path="/stats" />
         </Routes>

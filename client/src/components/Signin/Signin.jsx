@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ATYPES from '../../store/types';
 
 export function Signin() {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const isAuth = useSelector((state) => state.isAuth);
 
-  // useEffect(() => {
-  //   if (isAuth) navigate('/');
-  // }, [isAuth]);
+  useEffect(() => {
+    if (isAuth) navigate('/');
+  }, [isAuth]);
 
   const [userSignin, setUserSignin] = useState({ email: '', password: '' });
   const [errorSignin, setErrorSignin] = useState('');
@@ -18,7 +18,7 @@ export function Signin() {
 
   const handleChange = (event) => {
     setUserSignin({ ...userSignin, [event.target.name]: event.target.value });
-    // console.log('user: ', userSignin);
+    console.log('user: ', userSignin);
   };
 
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -36,10 +36,12 @@ export function Signin() {
         const data = await response.json();
         setErrorSignin(capitalize(data.errMsg));
         setAlertClass('alert alert-danger');
+        console.log('--cookie-->', document.cookie);
       } else {
         setAlertClass('alert alert-success');
         setErrorSignin("Well done! You're logged in!");
         dispatch({ type: ATYPES.SET_USER, payload: {} });
+        navigate('/');
       }
       setUserSignin({ email: '', password: '' });
     } catch (error) {
