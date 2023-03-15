@@ -46,6 +46,11 @@ export function Navbar() {
                   Sign Out
                 </Button>
               </Link>
+              <Link className="navLinks" to="/game_page">
+                <Button variant="h6" color="inherit" component="div">
+                  Game Page
+                </Button>
+              </Link>
 
             </Toolbar>
           </AppBar>
@@ -70,6 +75,11 @@ export function Navbar() {
               <Link className="navLinks" to="/auth/signin">
                 <Button variant="h6" color="inherit" component="div">
                   Sign In
+                </Button>
+              </Link>
+              <Link className="navLinks" to="/game_page">
+                <Button variant="h6" color="inherit" component="div">
+                  Game Page
                 </Button>
               </Link>
 
