@@ -10,7 +10,6 @@ import ATYPES from '../../store/types';
 
 export function Navbar() {
   const isAuth = useSelector((store) => store.isAuth);
-  console.log('isAuth-->', isAuth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,14 +19,11 @@ export function Navbar() {
       const response = await fetch('http://localhost:3001/auth/signout', {
         credentials: 'include',
       });
-      console.log('--heheheh-->');
       // eslint-disable-next-line no-unused-vars
       const result = await response.json();
-      console.log('--response.json-->', response.json());
       dispatch({ type: ATYPES.SIGN_OUT_USER });
       navigate('/');
     } catch (error) {
-      // console.log('--heheheh-->');
       console.log(error.message);
     }
   };

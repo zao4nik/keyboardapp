@@ -6,10 +6,9 @@ import {
 import { useDispatch } from 'react-redux';
 // import components
 import {
-  Typing, Signup, Signin, Navbar,
+  Typing, Signup, Signin, Navbar, Keyboard,
 } from './components';
 import ATYPES from './store/types';
-import Keyboard from './components/Keyboard/Keybord';
 
 function App() {
   const dispatch = useDispatch();
