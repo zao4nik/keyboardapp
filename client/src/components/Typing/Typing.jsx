@@ -105,8 +105,7 @@ export function Typing() {
     };
   }, []);
 
-  const handleKeyDown = (event) => {
-   
+  const handleKeyDown = async (event) => {
     setStats((prevStats) => ({
       ...prevStats,
       clickCount: prevStats.clickCount + 1,
@@ -122,10 +121,17 @@ export function Typing() {
       }));
       if (data.length === 0) {
         setIsHidden(true)
-        console.log(stats)
+        try {
+          const response = await fetch('http://localhost:3001/game/game_data' , {
+            credentials: 'include',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(stats),
+          })
+        } catch (error) {
+          console.log(error)
+        }
       }
-      
-      
     }
   };
   // console.log(stats);
