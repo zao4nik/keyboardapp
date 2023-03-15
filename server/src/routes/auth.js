@@ -4,7 +4,8 @@ const express = require('express');
 const {
   createUserAndSession,
   checkUserAndCreateSession,
-  destroySession,
+  signOut,
+  userInfo,
 } = require('../controllers/authControllers');
 
 const router = express.Router();
@@ -17,6 +18,8 @@ router
   .route('/signin')
   .post(checkUserAndCreateSession); // Аутентификация пользователя
 
-router.get('/signout', destroySession);
+router.get('/signout', signOut);
+
+router.get('/userinfo', userInfo);
 
 module.exports = router;
