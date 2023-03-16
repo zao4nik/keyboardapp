@@ -4,15 +4,18 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-one-expression-per-line */
-
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Pagination from '@mui/material/Pagination';
 import Stat from './Stat';
-// import { data } from './data';
+import { data } from './data';
+import { Signin } from '../Signin/Signin';
+// import Pagination from './Pagination';
 import styles from './MyStatistics.module.css';
 
 export function MyStatistics() {
-  const [stat, setStat] = useState([]);
+  const isAuth = useSelector((store) => store.isAuth);
+  const [stat, setStat] = useState(data);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [statPerPage] = useState(3);
@@ -59,7 +62,7 @@ export function MyStatistics() {
     pageNumbers.push(i);
   }
 
-  return (
+  return isAuth ? (
     <div>
       <h1 className={styles.myStat}>My Statistics</h1>
       <Pagination
@@ -71,10 +74,9 @@ export function MyStatistics() {
         page={currentPage} // текущая активная страница
         onChange={(_, num) => setCurrentPage(num)} // функция для клика по номеру страницу
       />
-      <Stat
-        data={currentStat}
-        loading={loading}
-      />
+      <Stat data={currentStat} loading={loading} />
     </div>
+  ) : (
+    <Signin />
   );
 }

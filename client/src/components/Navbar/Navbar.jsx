@@ -79,14 +79,6 @@ export function Navbar() {
           </button>
 
           <button
-            onClick={routeMyStats}
-            type="submit"
-            className="btn btn-dark"
-          >
-            My Stats
-          </button>
-
-          <button
             onClick={onSignOut}
             type="submit"
             className="btn btn-dark"
