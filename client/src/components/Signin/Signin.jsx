@@ -1,6 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import ATYPES from '../../store/types';
 
 export function Signin() {
@@ -48,6 +50,25 @@ export function Signin() {
       console.log('error: ', error);
     }
   };
+
+  function handleCallbackResponse(response) {
+    console.log(`Encoded JWT ID token: ${response.credential}`);
+    const userObject = jwtDecode(response.credential);
+    console.log(userObject);
+  }
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: '329145851767-nm1iqp5h5ea23e2n1j7smjeoebl7iq4c.apps.googleusercontent.com',
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById('signInDiv'),
+      { theme: 'standard', size: 'medium' },
+    );
+  }, []);
 
   return (
     <div className="container">
@@ -105,6 +126,12 @@ export function Signin() {
           className="btn btn-dark"
         >
           Sign In
+        </button>
+        <button
+          type="submit"
+          className="btn btn-dark"
+        >
+          <div id="signInDiv" />
         </button>
       </form>
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 require('dotenv').config(); //  импорт библиотеки dotenv
 const express = require('express'); // импорт библиотеки express
 const logger = require('morgan');
@@ -38,6 +39,7 @@ app.use(cors({
   credentials: true,
   // allowedHeaders: ['content-type'],
 }));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
