@@ -1,13 +1,17 @@
 import './App.css';
 import * as React from 'react';
-import {
-  BrowserRouter, Routes, Route,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 // import components
 import {
-  Typing, Signup, Signin, Navbar, Keyboard, MyStatistics,
+  Typing,
+  Signup,
+  Signin,
+  Navbar,
+  Keyboard,
+  MyStatistics,
+  Add,
 } from './components';
 import { GamePage } from './screens';
 import ATYPES from './store/types';
@@ -33,6 +37,7 @@ function App() {
           <Route path="/typing" element={<Typing />} />
           <Route path="/keyboard" element={<Keyboard />} />
           <Route path="/game_page" element={<GamePage />} />
+          <Route path="/game_add" element={<Add />} />
           <Route path="/stats" element={<MyStatistics />} />
         </Routes>
       </BrowserRouter>
