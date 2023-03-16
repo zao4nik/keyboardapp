@@ -1,6 +1,7 @@
+import { red } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import ATYPES from '../../store/types';
 
 export function Signin() {
@@ -32,6 +33,7 @@ export function Signin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userSignin),
       });
+      const result = await response.json();
       if (response.status !== 200) {
         const data = await response.json();
         setErrorSignin(capitalize(data.errMsg));
@@ -39,9 +41,9 @@ export function Signin() {
       } else {
         setAlertClass('alert alert-success');
         setErrorSignin("Well done! You're logged in!");
-        dispatch({ type: ATYPES.SET_USER, payload: {} });
+        dispatch({ type: ATYPES.SET_USER, payload: { id: result.id, login: result.login } });
       }
-      navigate('/game_page');
+      redirect('/game_page');
       setUserSignin({ email: '', password: '' });
     } catch (error) {
       console.log('error: ', error);
