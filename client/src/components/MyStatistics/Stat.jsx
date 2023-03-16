@@ -17,7 +17,7 @@ function Stat({ data, loading }) {
             className={styles.container}
             key={item.id}
           >
-            <p>
+            <p className={styles.myItem}>
               {' '}
               Data: {item.data} | Chars/Sec: {item['chars/sec']} | Words/Min:{' '}
               {item['words/min']} | Accuracy: {item.accuracy} | Mistakes:{' '}
