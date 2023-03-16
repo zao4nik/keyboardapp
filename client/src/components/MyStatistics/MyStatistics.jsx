@@ -4,43 +4,56 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Pagination from '@mui/material/Pagination';
 import Stat from './Stat';
 import { data } from './data';
 import { Signin } from '../Signin/Signin';
 // import Pagination from './Pagination';
+import styles from './MyStatistics.module.css';
 
 export function MyStatistics() {
   const isAuth = useSelector((store) => store.isAuth);
-  const [stat /* , setStat */] = useState(data);
-  const [loading /* , setLoading */] = useState(false);
+  const [stat, setStat] = useState(data);
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [statPerPage] = useState(3);
 
   // * надо переделать для запроса с базы
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await fetch('url', {
-  //       method: 'GET',
-  //       credentials: 'include', // куки
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     const MyStat = await response.json();
-  //     console.log('statistic ', MyStat);
-  //     setStat(MyStat);
-  //   })();
-  //   setLoading(false);
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('http://localhost:3001/stats', {
+        method: 'GET',
+        credentials: 'include', // куки
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const allStatistics = await response.json();
+
+      // console.log('statistic ', allStatistics);
+
+      const arrayForMap = allStatistics.allStatistics;
+
+      const myStata = arrayForMap.map((item) => ({
+        id: item.id,
+        data: item.createdAt,
+        'chars/sec': item.charPsec,
+        'words/min': item.wordsPmin,
+        accuracy: item.accuracy,
+        mistakes: item.mistakeCount,
+      }));
+      // console.log('🚀 ~ myStata:', myStata);
+
+      setStat(myStata);
+    })();
+    setLoading(false);
+  }, []);
 
   const lastStatIndex = currentPage * statPerPage;
   const firstStatIndex = lastStatIndex - statPerPage;
   const currentStat = stat.slice(firstStatIndex, lastStatIndex);
-
-  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const pageNumbers = [];
   const totalStat = stat.length;
@@ -51,9 +64,12 @@ export function MyStatistics() {
 
   return isAuth ? (
     <div>
-      <h1>MyStatistics</h1>
+      <h1 className={styles.myStat}>My Statistics</h1>
       <Pagination
+        sx={{ button: { color: '#fbeee0' } }}
         color="primary"
+        variant="outlined"
+        shape="rounded"
         count={pageNumbers.length} // кол-во страничек пагинации (длина массива)
         page={currentPage} // текущая активная страница
         onChange={(_, num) => setCurrentPage(num)} // функция для клика по номеру страницу
