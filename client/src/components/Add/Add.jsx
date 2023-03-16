@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import './Add.styles.css';
 
 export default function Add() {
   const [title, setTitle] = useState('');
@@ -35,14 +36,14 @@ export default function Add() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
+      <label htmlFor="ExampleTitleInput">
         Title:
         <input type="text" value={title} onChange={handleTitleChange} />
       </label>
       <br />
-      <label>
+      <label htmlFor="ExampleTextInput2">
         Text:
-        <textarea value={text} onChange={handleTextChange} />
+        <textarea className="addContainer" value={text} onChange={handleTextChange} />
       </label>
       <br />
       <button type="submit">Add</button>

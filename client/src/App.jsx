@@ -1,15 +1,18 @@
 import './App.css';
 import * as React from 'react';
-import {
-  BrowserRouter, Routes, Route,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ThemeProvider } from '@mui/material/styles';
+
 // import components
 import {
-  Typing, Signup, Signin, Navbar, Keyboard, MyStatistics, Add,
+  Typing,
+  Signup,
+  Signin,
+  Navbar,
+  Keyboard,
+  MyStatistics,
+  Add,
 } from './components';
-import { appTheme } from './components/MUIstyles/Styles';
 import { GamePage } from './screens';
 import ATYPES from './store/types';
 
@@ -24,23 +27,21 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={appTheme}>
-      <div className="App">
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/auth/signin" element={<Signin />} />
-            <Route path="/auth/signup" element={<Signup />} />
-            <Route path="/auth/signout" />
-            <Route path="/typing" element={<Typing />} />
-            <Route path="/keyboard" element={<Keyboard />} />
-            <Route path="/game_page" element={<GamePage />} />
-            <Route path="/game_add" element={<Add />} />
-            <Route path="/stats" element={<MyStatistics />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </ThemeProvider>
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/auth/signin" element={<Signin />} />
+          <Route path="/auth/signup" element={<Signup />} />
+          <Route path="/auth/signout" />
+          <Route path="/typing" element={<Typing />} />
+          <Route path="/keyboard" element={<Keyboard />} />
+          <Route path="/game_page" element={<GamePage />} />
+          <Route path="/game_add" element={<Add />} />
+          <Route path="/stats" element={<MyStatistics />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

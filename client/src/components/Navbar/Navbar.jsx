@@ -2,12 +2,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import { ThemeProvider } from '@mui/material/styles';
-import { navTheme, NavBarButtonsStyled, LinkStyled } from '../MUIstyles/Styles';
 import ATYPES from '../../store/types';
+import './Navbar.styles.css';
 
 export function Navbar() {
   const isAuth = useSelector((store) => store.isAuth);
@@ -29,69 +25,103 @@ export function Navbar() {
     }
   };
 
+  const routePractice = () => {
+    const path = '/game_page';
+    navigate(path);
+  };
+
+  const routeMyStats = () => {
+    const path = '/stats';
+    navigate(path);
+  };
+
+  const routeSignin = () => {
+    const path = '/auth/signin';
+    navigate(path);
+  };
+
+  const routeSignup = () => {
+    const path = '/auth/signup';
+    navigate(path);
+  };
+
+  const routeAdd = () => {
+    const path = '/game_add';
+    navigate(path);
+  };
+
   return (
-    <ThemeProvider theme={navTheme}>
-      <main>
-        {isAuth ? (
-          <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-              <Toolbar variant="dense">
+    <main>
+      {isAuth ? (
+        <div className="navbarContainer">
+          <button
+            onClick={routePractice}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Practice
+          </button>
 
-                <LinkStyled className="navLinks" to="/game_page">
-                  <NavBarButtonsStyled variant="h6" color="inherit" component="div">
-                    Practice
-                  </NavBarButtonsStyled>
-                </LinkStyled>
+          <button
+            onClick={routeMyStats}
+            type="submit"
+            className="btn btn-dark"
+          >
+            My Stats
+          </button>
 
-                <LinkStyled className="navLinks" to="/game_add">
-                  <NavBarButtonsStyled variant="h6" color="inherit" component="div">
-                    Add Text
-                  </NavBarButtonsStyled>
-                </LinkStyled>
+          <button
+            onClick={routeAdd}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Add Text
+          </button>
 
-                <LinkStyled className="navLinks" to="/stats">
-                  <NavBarButtonsStyled variant="h6" color="inherit" component="div">
-                    My Stats
-                  </NavBarButtonsStyled>
-                </LinkStyled>
+          <button
+            onClick={routeMyStats}
+            type="submit"
+            className="btn btn-dark"
+          >
+            My Stats
+          </button>
 
-                <LinkStyled className="navLinks" to="/auth/signout">
-                  <NavBarButtonsStyled onClick={onSignOut} variant="h6" color="inherit" component="div">
-                    Sign Out
-                  </NavBarButtonsStyled>
-                </LinkStyled>
+          <button
+            onClick={onSignOut}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Sign out
+          </button>
+        </div>
+      ) : (
+        <div className="navbarContainer">
+          <button
+            onClick={routePractice}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Practice
+          </button>
 
-              </Toolbar>
-            </AppBar>
-          </Box>
-        ) : (
-          <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-              <Toolbar variant="dense">
+          <button
+            onClick={routeSignup}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Sign Up
+          </button>
 
-                <LinkStyled className="navLinks" to="/game_page">
-                  <NavBarButtonsStyled variant="h6" color="inherit" component="div">
-                    Practice
-                  </NavBarButtonsStyled>
-                </LinkStyled>
+          <button
+            onClick={routeSignin}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Sign In
+          </button>
 
-                <LinkStyled className="navLinks" to="/auth/signup">
-                  <NavBarButtonsStyled variant="h6" color="inherit" component="div">
-                    Sign Up
-                  </NavBarButtonsStyled>
-                </LinkStyled>
-
-                <LinkStyled className="navLinks" to="/auth/signin">
-                  <NavBarButtonsStyled variant="h6" color="inherit" component="div">
-                    Sign In
-                  </NavBarButtonsStyled>
-                </LinkStyled>
-
-              </Toolbar>
-            </AppBar>
-          </Box>
-        )}
-      </main>
-    </ThemeProvider>
+        </div>
+      )}
+    </main>
   );
 }

@@ -1,4 +1,5 @@
 // Импорт bcrypt для хеширования паролей:
+// eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcrypt');
 // Импорт модели User из БД:
 const { User } = require('../../db/models');

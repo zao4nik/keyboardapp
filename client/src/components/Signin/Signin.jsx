@@ -18,7 +18,6 @@ export function Signin() {
 
   const handleChange = (event) => {
     setUserSignin({ ...userSignin, [event.target.name]: event.target.value });
-    console.log('user: ', userSignin);
   };
 
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -44,7 +43,6 @@ export function Signin() {
         setErrorSignin("Well done! You're logged in!");
         dispatch({ type: ATYPES.SET_USER, payload: { userId, login, email } });
       }
-      navigate('/game_page');
       setUserSignin({ email: '', password: '' });
     } catch (error) {
       console.log('error: ', error);
