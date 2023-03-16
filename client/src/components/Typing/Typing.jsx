@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+import '../../App.css';
 import React, { useEffect, useState } from 'react';
 
 function getRandomInt(min, max) {

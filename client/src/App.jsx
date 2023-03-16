@@ -4,20 +4,14 @@ import {
   BrowserRouter, Routes, Route,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 // import components
 import {
   Typing, Signup, Signin, Navbar, Keyboard,
 } from './components';
+import { appTheme } from './components/MUIstyles/Styles';
 import { GamePage } from './screens';
 import ATYPES from './store/types';
-
-const THEME = createTheme({
-  typography: {
-    fontFamily: '"Courier New", Courier, monospace',
-    fontWeight: 'bold',
-  },
-});
 
 function App() {
   const dispatch = useDispatch();
@@ -30,14 +24,14 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={THEME}>
+    <ThemeProvider theme={appTheme}>
       <div className="App">
         <BrowserRouter>
           <Navbar />
           <Routes>
             <Route path="/auth/signin" element={<Signin />} />
             <Route path="/auth/signup" element={<Signup />} />
-            <Route path="/auth/signout" element={<Signin />} />
+            <Route path="/auth/signout" />
             <Route path="/typing" element={<Typing />} />
             <Route path="/keyboard" element={<Keyboard />} />
             <Route path="/game_page" element={<GamePage />} />
