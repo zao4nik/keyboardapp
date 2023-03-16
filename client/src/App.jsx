@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
 // import components
 import {
-  Typing, Signup, Signin, Navbar, Keyboard, MyStatistics
+  Typing, Signup, Signin, Navbar, Keyboard, MyStatistics,
 } from './components';
 import { appTheme } from './components/MUIstyles/Styles';
 import { GamePage } from './screens';
