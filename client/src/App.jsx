@@ -4,12 +4,20 @@ import {
   BrowserRouter, Routes, Route,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 // import components
 import {
   Typing, Signup, Signin, Navbar, Keyboard, MyStatistics
 } from './components';
 import { GamePage } from './screens';
 import ATYPES from './store/types';
+
+const THEME = createTheme({
+  typography: {
+    fontFamily: '"Courier New", Courier, monospace',
+    fontWeight: 'bold',
+  },
+});
 
 function App() {
   const dispatch = useDispatch();
