@@ -10,7 +10,7 @@ function getRandomInt(min, max) {
 
 function generateRandomCode() {
   let code = '';
-  const length = getRandomInt(5, 6); // длина кода от 5 до 30 символов
+  const length = getRandomInt(20, 30); // длина кода от 5 до 30 символов
 
   for (let i = 0; i < length; i += 1) {
     const num = getRandomInt(1, 4);
