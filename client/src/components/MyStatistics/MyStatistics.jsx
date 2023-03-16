@@ -29,7 +29,7 @@ export function MyStatistics() {
       });
       const allStatistics = await response.json();
 
-      console.log('statistic ', allStatistics);
+      // console.log('statistic ', allStatistics);
 
       const arrayForMap = allStatistics.allStatistics;
 
@@ -41,7 +41,7 @@ export function MyStatistics() {
         accuracy: item.accuracy,
         mistakes: item.mistakeCount,
       }));
-      console.log('🚀 ~ myStata:', myStata);
+      // console.log('🚀 ~ myStata:', myStata);
 
       setStat(myStata);
     })();
