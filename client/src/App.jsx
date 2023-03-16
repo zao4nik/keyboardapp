@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 // import components
 import {
-  Typing, Signup, Signin, Navbar, Keyboard,
+  Typing, Signup, Signin, Navbar, Keyboard, MyStatistics
 } from './components';
 import { GamePage } from './screens';
 import ATYPES from './store/types';
@@ -30,22 +30,20 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={THEME}>
-      <div className="App">
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/auth/signin" element={<Signin />} />
-            <Route path="/auth/signup" element={<Signup />} />
-            <Route path="/auth/signout" element={<Signin />} />
-            <Route path="/typing" element={<Typing />} />
-            <Route path="/keyboard" element={<Keyboard />} />
-            <Route path="/game_page" element={<GamePage />} />
-            <Route path="/stats" />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </ThemeProvider>
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/auth/signin" element={<Signin />} />
+          <Route path="/auth/signup" element={<Signup />} />
+          <Route path="/auth/signout" element={<Signin />} />
+          <Route path="/typing" element={<Typing />} />
+          <Route path="/keyboard" element={<Keyboard />} />
+          <Route path="/game_page" element={<GamePage />} />
+          <Route path="/stats" element={<MyStatistics />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
