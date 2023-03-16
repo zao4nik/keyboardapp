@@ -36,10 +36,12 @@ export function Signin() {
         setErrorSignin(capitalize(data.errMsg));
         setAlertClass('alert alert-danger');
       } else {
+        const data = await response.json();
+        console.log('dataInSignIn', data);
+        const { userId, login, email } = data;
         setAlertClass('alert alert-success');
         setErrorSignin("Well done! You're logged in!");
-        dispatch({ type: ATYPES.SET_USER, payload: {} });
-        navigate('/game_page');
+        dispatch({ type: ATYPES.SET_USER, payload: { userId, login, email } });
       }
       setUserSignin({ email: '', password: '' });
     } catch (error) {

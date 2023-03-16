@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable no-use-before-define */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -206,43 +207,43 @@ function Keyboard() {
   function isKeyPressed(key) {
     return pressedKeys.includes(key);
   }
-  const config = { mass: 4, tension: 500, friction: 300 };
+  const config = { mass: 4, tension: 480, friction: 400 };
 
   const trail0 = useTrail(keys0.length, {
     config,
     opacity: 1,
     transform: 'translateY(0)',
-    from: { opacity: 0, transform: 'translateY(50px)' },
+    from: { opacity: 0, transform: 'translateY(60px)' },
     delay: 400,
   });
   const trail1 = useTrail(keys1.length, {
     config,
     opacity: 1,
     transform: 'translateY(0)',
-    from: { opacity: 0, transform: 'translateY(50px)' },
+    from: { opacity: 0, transform: 'translateY(60px)' },
     delay: 400,
   });
   const trail2 = useTrail(keys2.length, {
     config,
     opacity: 1,
     transform: 'translateY(0)',
-    from: { opacity: 0, transform: 'translateY(50px)' },
+    from: { opacity: 0, transform: 'translateY(60px)' },
     delay: 400,
   });
   const trail3 = useTrail(keys3.length, {
     config,
     opacity: 1,
     transform: 'translateY(0)',
-    from: { opacity: 0, transform: 'translateY(50px)' },
+    from: { opacity: 0, transform: 'translateY(60px)' },
     delay: 400,
   });
 
   const items = ['Space'];
   const trail = useTrail(items.length, {
     config,
-    from: { opacity: 0, transform: 'translateY(120px)' },
+    from: { opacity: 0, transform: 'translateY(190px)' },
     to: { opacity: 1, transform: 'translateY(0,0,0)' },
-    delay: 1000,
+    delay: 820,
   });
   //   const isKeyPressed = (key) => {
   //
@@ -310,13 +311,6 @@ function Keyboard() {
         </ul>
 
       </div>
-      {lastKey && (
-      <p>
-        Last key pressed:
-        {' '}
-        {lastKey}
-      </p>
-      )}
     </div>
   );
 }
