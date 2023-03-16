@@ -9,7 +9,7 @@ export function Signin() {
   const isAuth = useSelector((state) => state.isAuth);
 
   useEffect(() => {
-    if (isAuth) navigate('/');
+    if (isAuth) navigate('/game_page');
   }, [isAuth]);
 
   const [userSignin, setUserSignin] = useState({ email: '', password: '' });
