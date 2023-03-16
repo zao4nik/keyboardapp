@@ -11,6 +11,7 @@ input {
   font-family: 'Courier New', Courier, monospace;
 }
 
+/* Общая цветовая гамма - не менять!! */
 button {
   background-color: #fbeee0;
   border: 2px solid #422800;

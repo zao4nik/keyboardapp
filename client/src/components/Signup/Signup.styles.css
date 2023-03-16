@@ -1,4 +1,4 @@
-.button74 {
+/* .button74 {
   background-color: #fbeee0;
   border: 2px solid #422800;
   border-radius: 30px;
@@ -31,4 +31,8 @@
     min-width: 120px;
     padding: 0 25px;
   }
+} */
+
+input:focus{
+  outline: 0.5px solid orange;
 }
