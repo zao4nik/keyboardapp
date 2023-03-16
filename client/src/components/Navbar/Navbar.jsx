@@ -43,6 +43,12 @@ export function Navbar() {
                   </NavBarButtonsStyled>
                 </LinkStyled>
 
+                <LinkStyled className="navLinks" to="/game_add">
+                  <NavBarButtonsStyled variant="h6" color="inherit" component="div">
+                    Add Text
+                  </NavBarButtonsStyled>
+                </LinkStyled>
+
                 <LinkStyled className="navLinks" to="/stats">
                   <NavBarButtonsStyled variant="h6" color="inherit" component="div">
                     My Stats

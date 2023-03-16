@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
 // import components
 import {
-  Typing, Signup, Signin, Navbar, Keyboard, MyStatistics
+  Typing, Signup, Signin, Navbar, Keyboard, MyStatistics, Add,
 } from './components';
 import { appTheme } from './components/MUIstyles/Styles';
 import { GamePage } from './screens';
@@ -35,6 +35,7 @@ function App() {
             <Route path="/typing" element={<Typing />} />
             <Route path="/keyboard" element={<Keyboard />} />
             <Route path="/game_page" element={<GamePage />} />
+            <Route path="/game_add" element={<Add />} />
             <Route path="/stats" element={<MyStatistics />} />
           </Routes>
         </BrowserRouter>
