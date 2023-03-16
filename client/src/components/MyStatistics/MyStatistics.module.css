@@ -2,14 +2,34 @@
   /* display: flex; */
   /* align-items: center; */
   /* justify-content: center; */
-  border-radius: 15px;
-  background: rgb(247, 247, 247);
+  border-radius: 30px;
+  background: #fbeee0;
   text-align: center;
   font-size: 2rem;
   padding: 0.8em;
   margin: 50px;
-  box-shadow: 2px 2px 5px gray;
+  box-shadow: #422800 4px 4px 0 0;
   /* width: 50%; */
+}
+
+button {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+   display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 25px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 5px;
 }
 
 /* .myitem {
