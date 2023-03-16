@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Signin } from '../Signin/Signin';
 import './Add.styles.css';
 
 export default function Add() {
+  const isAuth = useSelector((store) => store.isAuth);
+  console.log('🚀  isAuth==>', isAuth);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const userID = useSelector((state) => state.user.userId);
-  console.log('🚀  userID==>', userID);
+  const userID = useSelector((state) => state?.user?.userId);
+  if (userID) console.log('🚀  userID==>', userID);
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -34,7 +37,7 @@ export default function Add() {
     setText('');
   };
 
-  return (
+  return isAuth ? (
     <form onSubmit={handleSubmit}>
       <label htmlFor="ExampleTitleInput">
         Title:
@@ -43,10 +46,16 @@ export default function Add() {
       <br />
       <label htmlFor="ExampleTextInput2">
         Text:
-        <textarea className="addContainer" value={text} onChange={handleTextChange} />
+        <textarea
+          className="addContainer"
+          value={text}
+          onChange={handleTextChange}
+        />
       </label>
       <br />
       <button type="submit">Add</button>
     </form>
+  ) : (
+    <Signin />
   );
 }
