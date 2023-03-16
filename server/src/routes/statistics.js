@@ -7,7 +7,8 @@ router.get('/', async (req, res) => {
   try {
     // const user = req.session;
     const allStatistics = await Game.findAll();
-    console.log('🚀 ~ allStatistics', allStatistics);
+
+    // console.log('🚀 ~ allStatistics', allStatistics);
 
     res.json({ allStatistics });
   } catch (error) {

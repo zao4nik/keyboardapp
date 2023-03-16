@@ -35,13 +35,13 @@ export function MyStatistics() {
 
       const myStata = arrayForMap.map((item) => ({
         id: item.id,
-        data: item.createdAt,
-        'chars/sec': item.charPsec,
+        data: `${item.createdAt.slice(11, 16)}♦${item.createdAt.slice(0, 10)}`,
+        timeGame: item.timeGame,
         'words/min': item.wordsPmin,
         accuracy: item.accuracy,
         mistakes: item.mistakeCount,
       }));
-      // console.log('🚀 ~ myStata:', myStata);
+      // console.log('🚀 ~ myStata:', myStata[0].data);
 
       setStat(myStata);
     })();
