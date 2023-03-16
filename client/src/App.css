@@ -1,5 +1,6 @@
 * {
   color: white;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 input {
@@ -28,7 +29,6 @@ button {
   -webkit-user-select: none;
   touch-action: manipulation;
   margin: 5px;
-
 }
 
 button:hover {
