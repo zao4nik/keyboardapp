@@ -27,6 +27,7 @@ const sessionControl = require('./middlewares/controlSession');
 // Импорт роутов:
 const authRouter = require('./routes/auth');
 const gameData = require('./routes/gameData');
+const gameStatistics = require('./routes/statistics');
 
 const { PORT, COOKIE_SECRET } = process.env; // задаем порт в переменную
 
@@ -60,6 +61,7 @@ app.use(sessionControl);
 
 app.use('/auth', authRouter);
 app.use('/game', gameData);
+
 io.listen(4000);
 
 io.on('connection', (socket) => {
@@ -105,5 +107,8 @@ io.on('connection', (socket) => {
 // io.on('disconnect',(socket) => {
 //   console.log('disconnect')
 // })
+
+app.use('/stats', gameStatistics);
+
 
 app.listen(PORT, () => { console.log(`server started on http://localhost:${PORT}`); }); // - проверяем работает ли сервер

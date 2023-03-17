@@ -10,7 +10,7 @@ export function Signin() {
   const isAuth = useSelector((state) => state.isAuth);
 
   useEffect(() => {
-    if (isAuth) navigate('/');
+    if (isAuth) navigate('/game_page');
   }, [isAuth]);
 
   const [userSignin, setUserSignin] = useState({ email: '', password: '' });
@@ -19,7 +19,6 @@ export function Signin() {
 
   const handleChange = (event) => {
     setUserSignin({ ...userSignin, [event.target.name]: event.target.value });
-    console.log('user: ', userSignin);
   };
 
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -39,11 +38,13 @@ export function Signin() {
         setErrorSignin(capitalize(data.errMsg));
         setAlertClass('alert alert-danger');
       } else {
+        const data = await response.json();
+        console.log('dataInSignIn', data);
+        const { userId, login, email } = data;
         setAlertClass('alert alert-success');
         setErrorSignin("Well done! You're logged in!");
-        dispatch({ type: ATYPES.SET_USER, payload: { id: result.id, login: result.login } });
+        dispatch({ type: ATYPES.SET_USER, payload: { userId, login, email } });
       }
-      redirect('/game_page');
       setUserSignin({ email: '', password: '' });
     } catch (error) {
       console.log('error: ', error);
