@@ -53,8 +53,8 @@ export function Signin() {
 
   function handleCallbackResponse(response) {
     console.log(`Encoded JWT ID token: ${response.credential}`);
-    const userObject = jwtDecode(response.credential);
-    console.log(userObject);
+    const userObjectGoogle = jwtDecode(response.credential);
+    console.log(userObjectGoogle);
   }
 
   useEffect(() => {
