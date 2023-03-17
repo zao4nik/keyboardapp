@@ -116,8 +116,6 @@ export function Typing() {
       timeGame: Number(seconds),
     }));
     const dataForChanging = data;
-    console.log('User pressed: ', event.key);
-    console.log('User pressed: ', event.key);
     if (event.key === data[0] && data.length > 0) {
       dataForChanging.shift();
       setData([...dataForChanging]);

@@ -42,6 +42,11 @@ export function Navbar() {
                     Practice
                   </NavBarButtonsStyled>
                 </LinkStyled>
+                <LinkStyled className="navLinks" to="/online_game_page">
+                  <NavBarButtonsStyled variant="h6" color="inherit" component="div">
+                    Online Practice
+                  </NavBarButtonsStyled>
+                </LinkStyled>
 
                 <LinkStyled className="navLinks" to="/stats">
                   <NavBarButtonsStyled variant="h6" color="inherit" component="div">
