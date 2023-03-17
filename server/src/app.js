@@ -4,6 +4,20 @@ const logger = require('morgan');
 const cors = require('cors');
 const session = require('express-session'); // библиотека для работы с сессиями
 const FileStore = require('session-file-store')(session);
+
+const app = express(); // создаём экземпляр сервера
+// Тут мы создаём сервер для сокетов и сокет сервер
+// const http = require('http');
+
+// const server = http.createServer(app);
+const { Server } = require('socket.io');
+
+const io = new Server({
+  cors: {
+    origin: 'http://localhost:3000',
+  },
+});
+
 // Импортим проверочную функцию dbConnect
 const dbConnect = require('../db/dbConnect');
 
@@ -14,8 +28,6 @@ const sessionControl = require('./middlewares/controlSession');
 const authRouter = require('./routes/auth');
 const gameData = require('./routes/gameData');
 const gameStatistics = require('./routes/statistics');
-
-const app = express(); // создаём экземпляр сервера
 
 const { PORT, COOKIE_SECRET } = process.env; // задаем порт в переменную
 
@@ -49,6 +61,54 @@ app.use(sessionControl);
 
 app.use('/auth', authRouter);
 app.use('/game', gameData);
+
+io.listen(4000);
+
+io.on('connection', (socket) => {
+  // тут мы ловим сообщение от юзера что он хочет в комнату и присылает свои данные
+  socket.on('sendUserToRoom', ({ user }) => {
+    // номер комнаты
+    let room = 1;
+    // толучаем список всех соединений в первой комнате, которую будем обновлять в будущем
+    const connections = io.sockets.adapter.rooms.get(room);
+
+    // socket.emit('newUserJoined', user);
+    // тут проверки на заполненность комнаты идёт и инкремент номера комнаты 
+    if (connections && connections.size >= 1) {
+      while (io.sockets.adapter.rooms.get(room) && io.sockets.adapter.rooms.get(room).size >= 2) {
+        room += 1;
+      }
+    }
+    // добавляем пользователя в комнату соответствущую номеру
+    socket.join(room);
+    // отправляем сообщения об активации пользователя в комнате ( на клиенте пока не используем)
+    socket.emit('newUserJoined', user);
+    // отправляем сообщения в конкретной комнате о её  номере и заполненности
+    io.in(room).emit('userCount', { connections: io.sockets.adapter.rooms.get(room).size, room });
+
+    // отправляем сообщение о закрытии комнаты участникам, если комната заполнена 
+    if (io.sockets.adapter.rooms.get(room) && io.sockets.adapter.rooms.get(room).size >= 2) {
+      io.in(room).emit('room_closed', `Комната закрыта для новых подключений ${room}`);
+    }
+  });
+
+  // обработчик, который вызывается, когда пользователь отключается от сервера
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+
+  socket.on('disconnect', (e) => {
+    const { rooms } = io.sockets.adapter;
+    console.log('rooms', rooms);
+    console.log(e);
+  });
+});
+
+// io.on('disconnect',(socket) => {
+//   console.log('disconnect')
+// })
+
 app.use('/stats', gameStatistics);
+
 
 app.listen(PORT, () => { console.log(`server started on http://localhost:${PORT}`); }); // - проверяем работает ли сервер

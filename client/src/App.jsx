@@ -5,15 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // import components
 import {
-  Typing,
-  Signup,
-  Signin,
-  Navbar,
-  Keyboard,
-  MyStatistics,
-  Add,
+
+  Typing, Signup, Signin, Navbar, Keyboard, MyStatistics, Add,
 } from './components';
-import { GamePage } from './screens';
+
+import { GamePage, OnlineGamePage } from './screens';
+
 import ATYPES from './store/types';
 import PageNotFound from './components/Page404/Page404';
 
@@ -44,6 +41,7 @@ function App() {
           <Route path="/keyboard" element={<Keyboard />} />
           <Route path="/game_page" element={<GamePage />} />
           <Route path="/game_add" element={<Add />} />
+          <Route path="/online_game_page" element={<OnlineGamePage />} />
           <Route path="/stats" element={<MyStatistics />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
