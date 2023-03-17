@@ -32,7 +32,6 @@ export function Signin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userSignin),
       });
-      const result = await response.json();
       if (response.status !== 200) {
         const data = await response.json();
         setErrorSignin(capitalize(data.errMsg));
