@@ -1,7 +1,7 @@
 import './App.css';
 import * as React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // import components
 import {
@@ -16,18 +16,15 @@ import PageNotFound from './components/Page404/Page404';
 
 function App() {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.isAuth);
   // console.log('isAuth: ', isAuth);
 
   React.useEffect(() => {
-    if (isAuth) {
-      fetch('http://localhost:3001/auth/userinfo', {
-        credentials: 'include',
-      })
-        .then((res) => res.json())
-        .then((result) => dispatch({ type: ATYPES.SET_USER, payload: result }));
-    }
-  }, [isAuth]);
+    fetch('http://localhost:3001/auth/userinfo', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((result) => dispatch({ type: ATYPES.SET_USER, payload: result }));
+  }, []);
 
   return (
     <div className="App">
