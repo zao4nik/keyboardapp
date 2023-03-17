@@ -8,8 +8,8 @@ const gameData = async (req, res) => {
   const wordsPmin = Math.round((rightCount / timeGame) * 60);
 
   if (req.session.user !== undefined) {
-    console.log(req.session.user);
-    const userId = req.session.user.id;
+    console.log('================', req.session.user);
+    const userId = req.session.user.userId;
     try {
       const game = await Game.create({
         userId,

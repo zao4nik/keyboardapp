@@ -10,7 +10,6 @@ import Pagination from '@mui/material/Pagination';
 import Stat from './Stat';
 import { data } from './data';
 import { Signin } from '../Signin/Signin';
-// import Pagination from './Pagination';
 import styles from './MyStatistics.module.css';
 
 export function MyStatistics() {
@@ -38,13 +37,13 @@ export function MyStatistics() {
 
       const myStata = arrayForMap.map((item) => ({
         id: item.id,
-        data: item.createdAt,
-        'chars/sec': item.charPsec,
+        data: `${item.createdAt.slice(11, 16)}♦${item.createdAt.slice(0, 10)}`,
+        timeGame: item.timeGame,
         'words/min': item.wordsPmin,
         accuracy: item.accuracy,
         mistakes: item.mistakeCount,
       }));
-      // console.log('🚀 ~ myStata:', myStata);
+      // console.log('🚀 ~ myStata:', myStata[0].data);
 
       setStat(myStata);
     })();
@@ -74,7 +73,10 @@ export function MyStatistics() {
         page={currentPage} // текущая активная страница
         onChange={(_, num) => setCurrentPage(num)} // функция для клика по номеру страницу
       />
-      <Stat data={currentStat} loading={loading} />
+      <Stat
+        data={currentStat}
+        loading={loading}
+      />
     </div>
   ) : (
     <Signin />
