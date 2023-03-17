@@ -5,10 +5,14 @@ const { Game } = require('../../db/models');
 
 router.get('/', async (req, res) => {
   try {
-    // const user = req.session;
-    const allStatistics = await Game.findAll();
+    const { user } = req.session;
+    const allStatistics = await Game.findAll({
+      where: { userId: user.userId },
+      // order: [['id', 'DESC']],
+      // raw: true,
+    });
 
-    // console.log('🚀 ~ allStatistics', allStatistics);
+    console.log('🚀 ~ allStatistics', allStatistics);
 
     res.json({ allStatistics });
   } catch (error) {
