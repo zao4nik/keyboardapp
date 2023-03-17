@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 // Импорт bcrypt для хеширования паролей:
 // eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcrypt');

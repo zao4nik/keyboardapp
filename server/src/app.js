@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
     const connections = io.sockets.adapter.rooms.get(room);
 
     // socket.emit('newUserJoined', user);
-    // тут проверки на заполненность комнаты идёт и инкремент номера комнаты 
+    // тут проверки на заполненность комнаты идёт и инкремент номера комнаты
     if (connections && connections.size >= 1) {
       while (io.sockets.adapter.rooms.get(room) && io.sockets.adapter.rooms.get(room).size >= 2) {
         room += 1;
@@ -88,7 +88,7 @@ io.on('connection', (socket) => {
     // отправляем сообщения в конкретной комнате о её  номере и заполненности
     io.in(room).emit('userCount', { connections: io.sockets.adapter.rooms.get(room).size, room });
 
-    // отправляем сообщение о закрытии комнаты участникам, если комната заполнена 
+    // отправляем сообщение о закрытии комнаты участникам, если комната заполнена
     if (io.sockets.adapter.rooms.get(room) && io.sockets.adapter.rooms.get(room).size >= 2) {
       io.in(room).emit('room_closed', `Комната закрыта для новых подключений ${room}`);
     }
@@ -111,6 +111,5 @@ io.on('connection', (socket) => {
 // })
 
 app.use('/stats', gameStatistics);
-
 
 app.listen(PORT, () => { console.log(`server started on http://localhost:${PORT}`); }); // - проверяем работает ли сервер
