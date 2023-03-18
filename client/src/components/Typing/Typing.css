@@ -1,0 +1,10 @@
+.superbox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.conterbox{
+    width: 500px;
+    height: 200px;
+    border: 2px solid coral;
+}
