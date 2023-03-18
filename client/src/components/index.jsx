@@ -4,9 +4,9 @@ import { Signup } from './Signup/Signup';
 import { Navbar } from './Navbar/Navbar';
 import Keyboard from './Keyboard/Keybord';
 import { MyStatistics } from './MyStatistics/MyStatistics';
-import { Events } from './Events/Events';
-import { ConnectionState } from './ConnectionState/ConnectionState';
-import { ConnectionManager } from './ConnectionManager/ConnectionManager';
+import { Portal } from './Portal/Portal';
+import { Popup } from './Popup/Popup';
+
 import Add from './Add/Add';
 
 export {
@@ -16,9 +16,7 @@ export {
   Navbar,
   Keyboard,
   MyStatistics,
-  Events,
-  ConnectionState,
-  ConnectionManager,
   Add,
-
+  Popup,
+  Portal,
 };
