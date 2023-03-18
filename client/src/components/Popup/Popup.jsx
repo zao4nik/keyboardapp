@@ -2,11 +2,26 @@
 import React from 'react';
 import './Popup.styles.css';
 
-export function Popup({ onClose }) {
+export function Popup({ data, onClose }) {
   return (
     <div className="popup">
-      <div className="container">
-        <div className="data">Сюда нужно выводить данные после игры и по кнопке завершать игровую сессию</div>
+      <div className="popup-container">
+        <div className="end"> End! </div>
+        <div className="data">
+          Right:
+          {data.rightCount}
+
+          Wrong: ?
+
+          Time:
+          {data.timeGame}
+          {' '}
+          seconds
+
+          Clicks:
+          {data.clickCount}
+
+        </div>
       </div>
       <button type="button" onClick={onClose}>Close</button>
 

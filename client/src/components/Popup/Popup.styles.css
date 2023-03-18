@@ -12,13 +12,13 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.container {
+.popup-container {
   border-radius: 15px;
   background: #fbeee0;
   text-align: center;
   font-size: 2rem;
   padding: 0.8em;
-  margin: 50px;
+  margin: 20px;
   box-shadow: #422800 10px 10px 0 0;
   color: #422800;
 }
@@ -27,4 +27,12 @@
   margin: 50px 40px;
   /* text-align: center; */
   color: #422800;
+}
+
+.end {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  font-family: 'Courier New', Courier, monospace;
 }
