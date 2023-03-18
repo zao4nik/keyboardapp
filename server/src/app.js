@@ -29,6 +29,7 @@ const sessionControl = require('./middlewares/controlSession');
 const authRouter = require('./routes/auth');
 const gameData = require('./routes/gameData');
 const gameStatistics = require('./routes/statistics');
+const addText = require('./routes/gameData');
 
 const { PORT, COOKIE_SECRET } = process.env; // задаем порт в переменную
 
@@ -63,6 +64,7 @@ app.use(sessionControl);
 
 app.use('/auth', authRouter);
 app.use('/game', gameData);
+app.use('/game_add', addText);
 
 io.listen(4000);
 
