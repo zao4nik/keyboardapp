@@ -63,10 +63,14 @@ export function MyStatistics() {
         totalStat={stat.length}
         paginate={paginate}
       />
-      <Stat
-        data={currentStat}
-        loading={loading}
-      />
+      {stat.length > 0 ? (
+        <Stat
+          data={currentStat}
+          loading={loading}
+        />
+      ) : (
+        <h1>No games played</h1>
+      )}
     </div>
   ) : (
     <Signin />

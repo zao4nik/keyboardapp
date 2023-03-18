@@ -8,8 +8,8 @@ router.get('/', async (req, res) => {
     const { user } = req.session;
     const allStatistics = await Game.findAll({
       where: { userId: user.userId },
-      // order: [['id', 'DESC']],
-      // raw: true,
+      order: [['createdAt', 'DESC']],
+      raw: true,
     });
 
     console.log('🚀 ~ allStatistics', allStatistics);
