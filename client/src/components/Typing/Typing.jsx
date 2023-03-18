@@ -66,7 +66,7 @@ export function Typing() {
     setGameStarted(false);
     setSeconds(0);
   }, []);
-
+  
   const startGame = useCallback(() => {
     setGameStarted(true);
   }, []);

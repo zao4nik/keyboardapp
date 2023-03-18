@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 // Импорт bcrypt для хеширования паролей:
 // eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcrypt');
@@ -21,13 +22,16 @@ const createUserAndSession = async (req, res) => {
     console.log(
       `Регистрация ======> Пользователь под login: ${user.login} - успешно зарегистрирован на сайте!`,
     );
+    req.session.user = { userId: user.id, email: user.email };
     req.session.save();
-    res.json({ user: user.id, login: user.login, email: user.email });
+    res.json({ userId: user.id, login: user.login, email: user.email });
     // res.status(200).end();
   } catch (err) {
     console.log(err);
     let errMsg = err.message;
-    if (err.name === 'SequelizeUniqueConstraintError') { errMsg = err.errors[0].message; }
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      errMsg = err.errors[0].message;
+    }
     console.error('Err message:', err.message);
     console.log('ОШИБКА ПРИ РЕГИСТРАЦИИ: =====> Текст ошибки:', err.message);
     console.error('Err code', err.code);
@@ -41,29 +45,33 @@ const checkUserAndCreateSession = async (req, res) => {
   // console.log('Авторизация: ===>', req.body);
   try {
     if (email || password) {
-    // Пытаемся найти пользователя в БД
+      // Пытаемся найти пользователя в БД
       const user = await User.findOne({ where: { email }, raw: true });
-      if (!user) return res.status(401).json({ errMsg: 'Неправильное имя/пароль' });
+      if (!user) { return res.status(401).json({ errMsg: 'Неправильное имя/пароль' }); }
 
       // Сравниваем хэш в БД с хэшем введённого пароля
       const isValidPassword = await bcrypt.compare(password, user.password);
-      if (!isValidPassword) return res.status(401).json({ errMsg: 'Неправильное пароль/имя' });
+      if (!isValidPassword) { return res.status(401).json({ errMsg: 'Неправильное пароль/имя' }); }
 
       console.log(
         `======> Авторизация: Пользователь под login: ${user.email} - успешно авторизовался на сайте!`,
       );
 
       // записываем в req.session.user при авторизации данные (id & login) (создаем сессию)
-      req.session.user = { id: user.id, email: user.email };
+      req.session.user = { userId: user.id, email: user.email };
       console.log(
         `------>Сессия: Сессия для пользователя: ${user.email} под id в БД: ${user.id} успешно создана!`,
       );
       req.session.save();
-      res.status(200).json(user);
+      res
+        .status(200)
+        .json({ userId: user.id, login: user.login, email: user.email });
     }
   } catch (err) {
     let errMsg = err.message;
-    if (err.name === 'SequelizeUniqueConstraintError') { errMsg = err.errors[0].message; }
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      errMsg = err.errors[0].message;
+    }
     console.error('Err message:', err.message);
     console.log('ОШИБКА ПРИ АВТОРИЗАЦИИ: =====> Текст ошибки:', err.message);
     console.error('Err code', err.code);

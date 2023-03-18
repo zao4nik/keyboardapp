@@ -8,13 +8,17 @@ export function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.isAuth);
-  console.log('isAuth: ', isAuth);
+  // console.log('isAuth: ', isAuth);
 
   useEffect(() => {
     if (isAuth) navigate('/');
   }, [isAuth]);
 
-  const [userSignup, setUserSignup] = useState({ login: '', email: '', password: '' });
+  const [userSignup, setUserSignup] = useState({
+    login: '',
+    email: '',
+    password: '',
+  });
   const [errorSignup, setErrorSignup] = useState('');
   const [alertClass, setAlertClass] = useState('d-none');
 
@@ -34,15 +38,17 @@ export function Signup() {
         body: JSON.stringify(userSignup),
       });
 
-      console.log('response: ', response);
       if (response.status !== 200) {
         const data = await response.json();
         setErrorSignup(capitalize(data.errMsg));
         setAlertClass('alert alert-danger');
       } else {
+        const data = await response.json();
+        const { userId, login, email } = data;
+        console.log('🚀  dataInSignUP==>', data);
         setAlertClass('alert alert-success');
         setErrorSignup("Well done! You're logged in!");
-        dispatch({ type: ATYPES.SET_USER, payload: {} });
+        dispatch({ type: ATYPES.SET_USER, payload: { userId, login, email } });
       }
       setUserSignup({ login: '', email: '', password: '' });
     } catch (error) {
@@ -52,19 +58,11 @@ export function Signup() {
 
   return (
     <div className="container">
-      <form
-        onSubmit={formSubmitHandler}
-      >
+      <form onSubmit={formSubmitHandler}>
         <h1> Sign Up</h1>
         <div className="mb-3">
-          <label
-            className="form-label w-100"
-            htmlFor="exampleInputUsername1"
-          >
-            <div
-              id="loginText"
-              className="form-text"
-            >
+          <label className="form-label w-100" htmlFor="exampleInputUsername1">
+            <div id="loginText" className="form-text">
               login
             </div>
             <input
@@ -78,14 +76,8 @@ export function Signup() {
           </label>
         </div>
         <div className="mb-3">
-          <label
-            className="form-label w-100"
-            htmlFor="exampleInputEmail1"
-          >
-            <div
-              id="emailText"
-              className="form-text"
-            >
+          <label className="form-label w-100" htmlFor="exampleInputEmail1">
+            <div id="emailText" className="form-text">
               Email address
             </div>
             <input
@@ -100,14 +92,8 @@ export function Signup() {
           </label>
         </div>
         <div className="mb-3">
-          <label
-            className="form-label w-100"
-            htmlFor="exampleInputPassword1"
-          >
-            <div
-              id="passwordText"
-              className="form-text"
-            >
+          <label className="form-label w-100" htmlFor="exampleInputPassword1">
+            <div id="passwordText" className="form-text">
               Password
             </div>
 
@@ -124,16 +110,10 @@ export function Signup() {
             {errorSignup}
           </div>
         </div>
-        <button
-          type="submit"
-          className={style.button74}
-        >
+        <button type="submit" className={style.button74}>
           Sign Up
         </button>
-        <div
-          id="emailHelp"
-          className="form-text"
-        >
+        <div id="emailHelp" className="form-text">
           We&apos;ll never share your email with anyone else.
         </div>
       </form>

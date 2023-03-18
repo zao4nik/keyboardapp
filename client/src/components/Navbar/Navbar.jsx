@@ -30,6 +30,11 @@ export function Navbar() {
     navigate(path);
   };
 
+  const routePracticeOnline = () => {
+    const path = '/online_game_page';
+    navigate(path);
+  };
+
   const routeMyStats = () => {
     const path = '/stats';
     navigate(path);
@@ -42,6 +47,11 @@ export function Navbar() {
 
   const routeSignup = () => {
     const path = '/auth/signup';
+    navigate(path);
+  };
+
+  const routeAdd = () => {
+    const path = '/game_add';
     navigate(path);
   };
 
@@ -58,6 +68,14 @@ export function Navbar() {
           </button>
 
           <button
+            onClick={routePracticeOnline}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Online Practice
+          </button>
+
+          <button
             onClick={routeMyStats}
             type="submit"
             className="btn btn-dark"
@@ -66,13 +84,20 @@ export function Navbar() {
           </button>
 
           <button
+            onClick={routeAdd}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Add Text
+          </button>
+
+          <button
             onClick={onSignOut}
             type="submit"
             className="btn btn-dark"
           >
-            Sign Out
+            Sign out
           </button>
-
         </div>
       ) : (
         <div className="navbarContainer">
