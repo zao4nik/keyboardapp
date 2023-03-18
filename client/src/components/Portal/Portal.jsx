@@ -6,11 +6,11 @@ export function Portal() {
   const [showPopup, setShowPopup] = useState(false);
   return (
     <div>
-      <button type="button" onClick={() => setShowPopup(true)}>
+      {/* <button type="button" onClick={() => setShowPopup(true)}>
         Show modal using a portal
-      </button>
+      </button> */}
       {showPopup && createPortal(
-        <Popup className="portal" onClose={() => setShowPopup(false)} />,
+        <Popup className="portal" onClose={() => setShowPopup()} />,
         document.body,
       )}
     </div>

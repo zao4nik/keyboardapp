@@ -2,6 +2,8 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
+import { Popup } from '../Popup/Popup';
 
 export function Typing() {
   const [data] = useState(() => 'hello W.orld alert( fruits.length );'.split(''));
@@ -66,7 +68,7 @@ export function Typing() {
     setGameStarted(false);
     setSeconds(0);
   }, []);
-  
+
   const startGame = useCallback(() => {
     setGameStarted(true);
   }, []);
@@ -102,34 +104,17 @@ export function Typing() {
       );
     }
     return (
-      <div>
-        <h2>End!</h2>
-        <p>
-          Right:
-          {correctChars.length}
-        </p>
-        <p>
-          Wrong:
-          {incorrectChars.length}
-        </p>
-        <p>
-          Time:
-          {stats.timeGame}
-          {' '}
-          seconds
-        </p>
-        <p>
-          Clicks:
-          {stats.clickCount}
-        </p>
-      </div>
+      createPortal(
+        <Popup data={stats} onClose={() => restartGame()} />,
+        document.body,
+      )
     );
   };
 
   return (
     <div>
       {renderGame()}
-      <button type="button" onClick={restartGame}>Restart</button>
+      {/* <button type="button" onClick={restartGame}>Restart</button> */}
     </div>
   );
 }
