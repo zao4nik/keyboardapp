@@ -9,7 +9,7 @@ const gameData = async (req, res) => {
 
   if (req.session.user !== undefined) {
     console.log('================', req.session.user);
-    const userId = req.session.user.userId;
+    const { userId } = req.session.user.userId;
     try {
       const game = await Game.create({
         userId,

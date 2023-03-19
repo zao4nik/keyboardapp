@@ -62,7 +62,7 @@ export function OnlineGamePage() {
   }, [handleClick]);
 
   return isAuth ? (
-    <div>
+    <div className="mainconteiner">
       <h2>
         {' '}
         Room:
