@@ -10,7 +10,7 @@ import './Typing.css';
 
 export function Typing() {
   const dispatch = useDispatch();
-  const [data] = useState(() => 'hello W.orld alert( fruits.length );'.split(''));
+  const [data] = useState(() => 'hello W.orldconst{[]}useEffect(() => {\nalert( fruits{}.\nlength useEffect(() => {);'.split(''));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [correctChars, setCorrectChars] = useState([]);
   const [incorrectChars, setIncorrectChars] = useState([]);
@@ -45,15 +45,22 @@ export function Typing() {
           rightCount: prevStats.rightCount + 1,
         }));
       }
-    } else if (currentIndex <= data.length - 1 && event.key !== 'Shift') {
+    } else if (currentIndex <= data.length - 1 && event.key !== 'Shift' && event.key !== 'Enter') {
       setIncorrectChars((prevIncorrectChars) => [...prevIncorrectChars, currentIndex]);
       setStats((prevStats) => ({
         ...prevStats,
         clickCount: prevStats.clickCount + 1,
       }));
+    } else if (event.key === 'Enter') {
+      setCurrentIndex((prevIndex) => {
+        const nextIndex = data.slice(prevIndex).findIndex((char) => char === '\n');
+        if (nextIndex !== -1) {
+          return prevIndex + nextIndex + 1;
+        }
+        return prevIndex;
+      });
     }
   }, [currentIndex, data, gameStarted, isHidden, seconds]);
-
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -101,16 +108,21 @@ export function Typing() {
       return (
         <div tabIndex={0} className="superbox">
           <div className="conterbox">
-            {data.map((char, index) => (
-              <span
-                key={index}
-                className={`${index === currentIndex ? 'blinking-cursor' : ''} ${
-                  correctChars.includes(index) ? 'correct' : ''
-                } ${incorrectChars.includes(index) ? 'incorrect' : ''}`}
-              >
-                {char}
-              </span>
-            ))}
+            {data.map((char, index) => {
+              if (char === '\n') {
+                return <br key={index} />;
+              }
+              return (
+                <span
+                  key={index}
+                  className={`${index === currentIndex ? 'blinking-cursor' : ''} ${
+                    correctChars.includes(index) ? 'correct' : ''
+                  } ${incorrectChars.includes(index) ? 'incorrect' : ''}`}
+                >
+                  {char}
+                </span>
+              );
+            })}
           </div>
         </div>
       );
