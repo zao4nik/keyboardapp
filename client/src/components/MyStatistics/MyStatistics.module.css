@@ -33,10 +33,15 @@
     color: rgb(196, 80, 45);
 } */
 
-.pageLink:focus {
+/* .pageLink:focus {
   outline: none;
   transform: scale(1.2);
   box-shadow: 0 0 0 5px rgba(224, 100, 17, 0.4);
+} */
+
+.pageLinkFocus {
+  outline: none;
+  transform: scale(1.2);
+  box-shadow: 0 0 0 5px rgba(224, 100, 17, 0.4);
+  margin: 20px;
 }
-
-

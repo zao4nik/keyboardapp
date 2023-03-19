@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
       raw: true,
     });
 
-    console.log('🚀 ~ allStatistics', allStatistics);
+    // console.log('🚀 ~ allStatistics', allStatistics);
 
     res.json({ allStatistics });
   } catch (error) {

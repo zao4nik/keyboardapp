@@ -13,11 +13,17 @@ import styles from './MyStatistics.module.css';
 import Pagination from './Pagination';
 
 export function MyStatistics() {
+  // const [isActive, setIsActive] = useState(false);
+
   const isAuth = useSelector((store) => store.isAuth);
   const [stat, setStat] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [statPerPage] = useState(3);
+
+  // const handleClick = () => {
+  //   setIsActive((current) => !current);
+  // };
 
   useEffect(() => {
     (async () => {

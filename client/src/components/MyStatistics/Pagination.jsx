@@ -1,14 +1,22 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './MyStatistics.module.css';
 
 function Pagination({ statPerPage, totalStat, paginate }) {
   const pageNumbers = [];
+  const [isActive, setIsActive] = useState(null);
 
   for (let i = 1; i <= Math.ceil(totalStat / statPerPage); i += 1) {
     pageNumbers.push(i);
   }
+
+  // const handleClick = (e) => {
+  //   setIsActive((current) => !current);
+  // };
 
   return (
     <div>
@@ -21,8 +29,14 @@ function Pagination({ statPerPage, totalStat, paginate }) {
           >
             <button
               type="button"
-              className={styles.pageLink}
-              onClick={() => paginate(number)}
+              // style={{
+              //   color: isActive ? 'red' : '',
+              // }}
+              className={isActive === number ? styles.pageLinkFocus : ''}
+              onClick={() => {
+                paginate(number);
+                setIsActive(number);
+              }}
             >
               {number}
             </button>
