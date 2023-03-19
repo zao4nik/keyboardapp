@@ -2,7 +2,7 @@
 import React from 'react';
 import './Popup.styles.css';
 
-export function Popup({ data, onClose }) {
+export function Popup({ data, onClose, incorrectCount }) {
   return (
     <div className="popup">
       <div className="popup-container">
@@ -11,7 +11,8 @@ export function Popup({ data, onClose }) {
           Right:
           {data.rightCount}
 
-          Wrong: ?
+          Wrong:
+          {incorrectCount}
 
           Time:
           {data.timeGame}
