@@ -30,6 +30,8 @@ export function OnlineGamePage() {
   useEffect(() => {
     if (isComplete === true) {
       socket.emit('end_game', { isComplete, roomName });
+      roomName.current = 'Waiting to join';
+      setRoomMate(0);
     }
   }, [isComplete]);
 
@@ -39,7 +41,8 @@ export function OnlineGamePage() {
     socket.on('end_game', (e) => {
       console.log(e);
       roomName.current = 'Waiting to join';
-      setRoomMate((prevState) => prevState - roomMate);
+      setRoomMate(0);
+      dispatch({ type: ATYPES.IS_WIN, payload: false });
       dispatch({ type: ATYPES.IS_HIDDEN, payload: true });
     });
   });

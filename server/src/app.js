@@ -70,6 +70,7 @@ io.listen(4000);
 
 io.on('connection', (socket) => {
   // тут мы ловим сообщение от юзера что он хочет в комнату и присылает свои данные
+
   socket.on('sendUserToRoom', ({ user }) => {
     // номер комнаты
     let room = 1;
