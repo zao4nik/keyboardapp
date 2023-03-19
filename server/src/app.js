@@ -29,6 +29,7 @@ const sessionControl = require('./middlewares/controlSession');
 const authRouter = require('./routes/auth');
 const gameData = require('./routes/gameData');
 const gameStatistics = require('./routes/statistics');
+const addText = require('./routes/gameData');
 
 const { PORT, COOKIE_SECRET } = process.env; // задаем порт в переменную
 
@@ -63,11 +64,13 @@ app.use(sessionControl);
 
 app.use('/auth', authRouter);
 app.use('/game', gameData);
+app.use('/game_add', addText);
 
 io.listen(4000);
 
 io.on('connection', (socket) => {
   // тут мы ловим сообщение от юзера что он хочет в комнату и присылает свои данные
+
   socket.on('sendUserToRoom', ({ user }) => {
     // номер комнаты
     let room = 1;
@@ -93,6 +96,28 @@ io.on('connection', (socket) => {
     if (io.sockets.adapter.rooms.get(room) && io.sockets.adapter.rooms.get(room).size >= 2) {
       io.in(room).emit('room_closed', `Комната закрыта для новых подключений ${room}`);
     }
+
+    socket.on('end_game', (data) => {
+      console.log(data.roomName.current);
+      socket.broadcast.to(data.roomName.current).emit('end_game', 'Game End');
+      // Закрыть комнату и вытолкнуть всех участников из нее
+      // const room = io.of('/').adapter.rooms.get(data.roomName.current);
+      // if (room) {
+      //   for (const socketId of room) {
+      //     // Выталкиваем сокет из комнаты
+      //     io.sockets.sockets.get(socketId).leave(data.roomName.current);
+      //   }
+      //   console.log(`Room ${data.roomName.current} is closed.`);
+      // }
+      const closedRoom = io.of('/').adapter.rooms.get(data.roomName.current);
+      if (closedRoom) {
+        Array.from(closedRoom).forEach((socketId) => {
+          // Выталкиваем сокет из комнаты
+          io.sockets.sockets.get(socketId).leave(data.roomName.current);
+        });
+        console.log(`Room ${data.roomName.current} is closed.`);
+      }
+    });
   });
 
   // обработчик, который вызывается, когда пользователь отключается от сервера

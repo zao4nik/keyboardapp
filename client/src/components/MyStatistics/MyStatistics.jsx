@@ -6,20 +6,19 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Pagination from '@mui/material/Pagination';
 import Stat from './Stat';
-import { data } from './data';
+// import { data } from './data';
 import { Signin } from '../Signin/Signin';
 import styles from './MyStatistics.module.css';
+import Pagination from './Pagination';
 
 export function MyStatistics() {
   const isAuth = useSelector((store) => store.isAuth);
-  const [stat, setStat] = useState(data);
+  const [stat, setStat] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [statPerPage] = useState(3);
 
-  // * надо переделать для запроса с базы
   useEffect(() => {
     (async () => {
       const response = await fetch('http://localhost:3001/stats', {
@@ -54,29 +53,24 @@ export function MyStatistics() {
   const firstStatIndex = lastStatIndex - statPerPage;
   const currentStat = stat.slice(firstStatIndex, lastStatIndex);
 
-  const pageNumbers = [];
-  const totalStat = stat.length;
-
-  for (let i = 1; i <= Math.ceil(totalStat / statPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return isAuth ? (
     <div>
       <h1 className={styles.myStat}>My Statistics</h1>
       <Pagination
-        sx={{ button: { color: '#fbeee0' } }}
-        color="primary"
-        variant="outlined"
-        shape="rounded"
-        count={pageNumbers.length} // кол-во страничек пагинации (длина массива)
-        page={currentPage} // текущая активная страница
-        onChange={(_, num) => setCurrentPage(num)} // функция для клика по номеру страницу
+        statPerPage={statPerPage}
+        totalStat={stat.length}
+        paginate={paginate}
       />
-      <Stat
-        data={currentStat}
-        loading={loading}
-      />
+      {stat.length > 0 ? (
+        <Stat
+          data={currentStat}
+          loading={loading}
+        />
+      ) : (
+        <h1>No games played</h1>
+      )}
     </div>
   ) : (
     <Signin />

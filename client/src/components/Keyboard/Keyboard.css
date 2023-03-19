@@ -1,20 +1,18 @@
 .keyboard-container {
-  margin-left:340px;
   width: 760px;
   height: 345px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius:4px;
   justify-content: center;
-  border-radius: 3px;
-  background: linear-gradient(to right, #fbeee0 100%, #fbeee0 100%) 0 0/100% 3px no-repeat,
+  /* background: linear-gradient(to right, #fbeee0 100%, #fbeee0 100%) 0 0/100% 3px no-repeat,
   linear-gradient(to bottom,#fbeee0 100%, #fbeee0 100%) 100% 0/3px 100% no-repeat,
   linear-gradient(to right, #fbeee0 100%, #fbeee0 100%) 100% 100%/100% 3px no-repeat,
   linear-gradient(to bottom, #fbeee0 100%, #fbeee0 100%) 0 100%/3px 100% no-repeat;
-  animation: anim-ramka-6 8s cubic-bezier(0.0, 0.0, 1.0, 1.0) 1 running;
- 
+  animation: anim-ramka-6 8s cubic-bezier(0.0, 0.0, 1.0, 1.0) 1 running; */
 }
-  @keyframes anim-ramka-6 {
+  /* @keyframes anim-ramka-6 {
   0% {
   background-size: 0 3px, 3px 0, 0 3px, 3px 0;
   }
@@ -22,15 +20,15 @@
   background-size: 100% 3px, 3px 0, 0 3px, 3px 0;
   }
   50% {
- background-size:    100% 3px, 3px 100%, 0 3px, 3px 0;
+  background-size:    100% 3px, 3px 100%, 0 3px, 3px 0;
   }
- 75% {
- background-size:    100% 3px, 3px 100%, 100% 3px, 3px 0;
- }
- 100% {
- background-size:    100% 3px, 3px 100%, 100% 3px, 3px 100%;
-}
-}
+  75% {
+  background-size:    100% 3px, 3px 100%, 100% 3px, 3px 0;
+  }
+  100% {
+  background-size:    100% 3px, 3px 100%, 100% 3px, 3px 100%;
+} */
+
 
 .keyboard {
   display: flex;
@@ -49,9 +47,9 @@
   li {
     height: 3em;
     width: 6em;
-    border: 2px solid #f1ebe3;
+    /* border: 2px solid #f1ebe3; */
     color: rgba(0,0,0,0.7);
-    box-shadow: #dfb782 2px 2px 0 0;
+    /* box-shadow: #dfb782 2px 2px 0 0; */
     border-radius: 0.4em;
     line-height: 3em;
     letter-spacing: 1px;
@@ -94,55 +92,59 @@
   }
   
   .pinky { 
-    background-color: crimson;
-    border: 2px solid crimson;
+    box-shadow: #4682B4 2px 3px 0 0;
+    background-color: LightSkyBlue;
+    border: 2px solid #ADD8E6
   }
   /* .pinky.selected {
     color: crimson;
   } */
   
   .ring { 
-    background-color: coral;
-    border: 2px solid coral;
+    box-shadow: #FF69B4 2px 3px 0 0;
+    background-color: LightPink;
+    border: 2px solid #FFC0CB;
   }
   /* .ring.selected {
     color: coral;
   } */
   
   .middle { 
-    background-color: darkorange;
-    border: 2px solid darkorange;
+    box-shadow: #228B22 2px 3px 0 0;
+    background-color: PaleGreen;
+    border: 2px solid #9ACD32;
   }
   /* .middle.selected {
     color: darkorange;
   } */
   
   .pointer1st { 
-    background-color: gold;
-    border: 2px solid gold;
+    box-shadow: #6A5ACD 2px 3px 0 0;
+    background-color: Lavender;
+    border: 2px solid #D8BFD8;
   }
   /* .pointer1st.selected {
     color: gold;
   } */
   
   .pointer2nd { 
-    background-color: khaki;
-    border: 2px solid khaki;
+    box-shadow: #f8af57 2px 3px 0 0;
+    background-color: PeachPuff;
+    border: 2px solid #FFB347;
   }
   /* .pointer2nd.selected {
     color: khaki;
   } */
   
   .pressed {
-    top: 4px;
-    
-    
-      color: #fff;
+    top: 5px;
+    color: #fff;
     }
   .space{
+    box-shadow: #f8af57 2px 3px 0 0;
     width: 100em;
-    background-color: darkorange;
-    border: 2px solid darkorange;
+    background-color: PeachPuff;
+    border: 2px solid #FFB347;
   }
   li.space.pressed {
     

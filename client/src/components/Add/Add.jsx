@@ -1,11 +1,16 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console */
 import React, { useState } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 import { useSelector } from 'react-redux';
 import { Signin } from '../Signin/Signin';
-import './Add.styles.css';
+
+import styles from './AddStyles.module.css';
+// import './Add.styles.css';
 
 export default function Add() {
   const isAuth = useSelector((store) => store.isAuth);
-  console.log('🚀  isAuth==>', isAuth);
+  // console.log('🚀  isAuth==>', isAuth);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const userID = useSelector((state) => state?.user?.userId);
@@ -38,23 +43,40 @@ export default function Add() {
   };
 
   return isAuth ? (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="ExampleTitleInput">
-        Title:
-        <input type="text" value={title} onChange={handleTitleChange} />
-      </label>
-      <br />
-      <label htmlFor="ExampleTextInput2">
-        Text:
-        <textarea
-          className="addContainer"
+    <div id="wrapper">
+      <form
+        onSubmit={handleSubmit}
+        className={styles.paper}
+      >
+        <label
+          htmlFor="ExampleTitleInput"
+          id={styles.margin}
+        >
+          Title:
+          <input
+            style={{ borderBottom: '3px solid' }}
+            type="text"
+            value={title}
+            onChange={handleTitleChange}
+            id={styles.title}
+            className={styles.title}
+          />
+        </label>
+        <br />
+
+        <TextareaAutosize
+          // className="addContainer"
           value={text}
           onChange={handleTextChange}
+          id={styles.text}
+          className={styles.text}
+          rows={4}
         />
-      </label>
-      <br />
-      <button type="submit">Add</button>
-    </form>
+        {/* </label> */}
+        <br />
+        <button type="submit">Add</button>
+      </form>
+    </div>
   ) : (
     <Signin />
   );

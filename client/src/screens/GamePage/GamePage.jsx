@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { Keyboard, Typing } from '../../components';
+import { Keyboard, Portal, Typing } from '../../components';
+import './GamePage.css';
 
 export function GamePage() {
   return (
-    <div>
+    <div className="mainconteiner">
+      <Portal />
       <Typing />
       <Keyboard />
     </div>

@@ -6,6 +6,8 @@ const initialState = {
   isAuth: false,
   game: null,
   questions: [],
+  isHidden: false,
+  isWin: true,
 };
 
 const redusers = (state = initialState, action) => {
@@ -15,6 +17,12 @@ const redusers = (state = initialState, action) => {
 
     case ATYPES.SIGN_OUT_USER:
       return { ...state, user: action.payload, isAuth: false };
+
+    case ATYPES.IS_HIDDEN:
+      return { ...state, isHidden: action.payload };
+
+    case ATYPES.IS_WIN:
+      return { ...state, isWin: action.payload };
 
     default:
       return state;

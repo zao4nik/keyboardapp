@@ -1,10 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import io from 'socket.io-client';
 import { Signin } from '../../components/Signin/Signin';
 import './OnlineGamePage.css';
 // import { socket } from '../../socket';
+import ATYPES from '../../store/types';
 
 import {
   Keyboard, Typing,
@@ -13,7 +14,9 @@ import {
 const socket = io('http://localhost:4000');
 
 export function OnlineGamePage() {
+  const dispatch = useDispatch();
   const isAuth = useSelector((store) => store.isAuth);
+  const isComplete = useSelector((store) => store.isHidden);
   // const [isConnected, setIsConnected] = useState(socket.connected);
   const [roomMate, setRoomMate] = useState(0);
   // const [roomCount, setRoomCount] = useState(0);
@@ -24,6 +27,26 @@ export function OnlineGamePage() {
   const handleClick = () => {
     socket.emit('sendUserToRoom', { user });
   };
+  //  тут мы отправляем сообщение сокет серверу о том что мы выиграли эту игру
+  useEffect(() => {
+    if (isComplete === true) {
+      socket.emit('end_game', { isComplete, roomName });
+      roomName.current = 'Waiting to join';
+      setRoomMate(0);
+    }
+  }, [isComplete]);
+
+  // получаем от сервера сообщение о том что мы проиграли
+  // и пытаемся обнулить состояние онлайн игры на стороне клиента
+  useEffect(() => {
+    socket.on('end_game', (e) => {
+      console.log(e);
+      roomName.current = 'Waiting to join';
+      setRoomMate(0);
+      dispatch({ type: ATYPES.IS_WIN, payload: false });
+      dispatch({ type: ATYPES.IS_HIDDEN, payload: true });
+    });
+  });
 
   const [eventOccurred, setEventOccurred] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -39,7 +62,7 @@ export function OnlineGamePage() {
         setEventOccurred(true);
         setShowModal(true);
       }
-    });
+    }, [isComplete]);
 
     socket.on('userCount', ({ connections, room }) => {
       // тут мы получаем количество юзеров и номер комнаты
