@@ -10,20 +10,20 @@ import './Typing.css';
 
 export function Typing() {
   const dispatch = useDispatch();
-  const [data] = useState(() => 'hello W.orldconst{[]}useEffect(() => {\nalert( fruits{}.\nlength useEffect(() => {);'.split(''));
+  const [data] = useState(() => 'hda'.split(''));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [correctChars, setCorrectChars] = useState([]);
   const [incorrectChars, setIncorrectChars] = useState([]);
   const isHidden = useSelector((store) => store.isHidden);
   const [seconds, setSeconds] = useState(0);
   const [stats, setStats] = useState({
-    rightCount: -1,
+    rightCount: 0,
     clickCount: 0,
     timeGame: 0,
   });
   const [gameStarted, setGameStarted] = useState(false);
 
-  const handleKeyDown = useCallback((event) => {
+  const handleKeyDown = useCallback(async (event) => {
     if (!gameStarted || isHidden) {
       return;
     }
@@ -37,6 +37,17 @@ export function Typing() {
           rightCount: prevStats.rightCount + 1,
           timeGame: seconds,
         }));
+
+        try {
+          await fetch('http://localhost:3001/game/game_data', {
+            credentials: 'include',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(stats),
+          });
+        } catch (error) {
+          console.log(error);
+        }
       } else {
         setCurrentIndex((prevIndex) => prevIndex + 1);
         setStats((prevStats) => ({
@@ -71,7 +82,12 @@ export function Typing() {
   useEffect(() => {
     const timer = setInterval(() => {
       if (gameStarted && !isHidden) {
+        // зачем тут дополнительно секунды?
         setSeconds((prevSeconds) => prevSeconds + 1);
+        setStats((prevStats) => ({
+          ...prevStats,
+          timeGame: prevStats.timeGame + 1,
+        }));
       }
     }, 1000);
     return () => {
@@ -90,6 +106,7 @@ export function Typing() {
     dispatch({ type: ATYPES.IS_HIDDEN, payload: false });
     setGameStarted(false);
     setSeconds(0);
+    dispatch({ type: ATYPES.IS_WIN, payload: true });
   }, []);
 
   const startGame = useCallback(() => {
@@ -129,7 +146,11 @@ export function Typing() {
     }
     return (
       createPortal(
-        <Popup data={stats} onClose={() => restartGame()} incorrectCount={incorrectChars.length} />,
+        <Popup
+          data={stats}
+          onClose={() => restartGame()}
+          incorrectCount={incorrectChars.length}
+        />,
         document.body,
       )
     );

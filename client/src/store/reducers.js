@@ -7,6 +7,7 @@ const initialState = {
   game: null,
   questions: [],
   isHidden: false,
+  isWin: true,
 };
 
 const redusers = (state = initialState, action) => {
@@ -19,6 +20,9 @@ const redusers = (state = initialState, action) => {
 
     case ATYPES.IS_HIDDEN:
       return { ...state, isHidden: action.payload };
+
+    case ATYPES.IS_WIN:
+      return { ...state, isWin: action.payload };
 
     default:
       return state;
