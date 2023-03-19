@@ -3,15 +3,18 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import ATYPES from '../../store/types';
 import { Popup } from '../Popup/Popup';
 import './Typing.css';
 
 export function Typing() {
+  const dispatch = useDispatch();
   const [data] = useState(() => 'hello W.orld alert( fruits.length );'.split(''));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [correctChars, setCorrectChars] = useState([]);
   const [incorrectChars, setIncorrectChars] = useState([]);
-  const [isHidden, setIsHidden] = useState(false);
+  const isHidden = useSelector((store) => store.isHidden);
   const [seconds, setSeconds] = useState(0);
   const [stats, setStats] = useState({
     rightCount: -1,
@@ -28,7 +31,7 @@ export function Typing() {
     if (event.type === 'keydown' && event.key === currentChar) {
       setCorrectChars((prevCorrectChars) => [...prevCorrectChars, currentIndex]);
       if (currentIndex === data.length - 1) {
-        setIsHidden(true);
+        dispatch({ type: ATYPES.IS_HIDDEN, payload: true });
         setStats((prevStats) => ({
           ...prevStats,
           rightCount: prevStats.rightCount + 1,
@@ -77,7 +80,7 @@ export function Typing() {
     setCurrentIndex(0);
     setCorrectChars([]);
     setIncorrectChars([]);
-    setIsHidden(false);
+    dispatch({ type: ATYPES.IS_HIDDEN, payload: false });
     setGameStarted(false);
     setSeconds(0);
   }, []);
