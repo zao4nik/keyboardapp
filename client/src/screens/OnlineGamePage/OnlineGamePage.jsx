@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import io from 'socket.io-client';
 import { Signin } from '../../components/Signin/Signin';
+import './OnlineGamePage.css';
 // import { socket } from '../../socket';
 import ATYPES from '../../store/types';
 
@@ -30,6 +31,8 @@ export function OnlineGamePage() {
   useEffect(() => {
     if (isComplete === true) {
       socket.emit('end_game', { isComplete, roomName });
+      roomName.current = 'Waiting to join';
+      setRoomMate(0);
     }
   }, [isComplete]);
 
@@ -39,16 +42,26 @@ export function OnlineGamePage() {
     socket.on('end_game', (e) => {
       console.log(e);
       roomName.current = 'Waiting to join';
-      setRoomMate((prevState) => prevState - roomMate);
+      setRoomMate(0);
+      dispatch({ type: ATYPES.IS_WIN, payload: false });
       dispatch({ type: ATYPES.IS_HIDDEN, payload: true });
     });
   });
 
+  const [eventOccurred, setEventOccurred] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [countdown, setCountdown] = useState(3);
+
   useEffect(() => {
     // получаем от сервера сообщение о закрытии комнаты
+    // * remove join button and add timer here
     socket.on('room_closed', (e) => {
       // где-то тут нужно стартануть таймер для начала игры
-      console.log(e);
+      console.log('=-=->', e);
+      if (e) {
+        setEventOccurred(true);
+        setShowModal(true);
+      }
     }, [isComplete]);
 
     socket.on('userCount', ({ connections, room }) => {
@@ -58,8 +71,20 @@ export function OnlineGamePage() {
     });
   }, [handleClick]);
 
+  useEffect(() => {
+    let timer;
+    if (showModal && countdown > 0) {
+      timer = setTimeout(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
+    } else if (showModal && countdown === 0) {
+      setShowModal(false);
+    }
+    return () => clearTimeout(timer);
+  }, [showModal, countdown]);
+
   return isAuth ? (
-    <div>
+    <div className="overlayBase">
       <h2>
         {' '}
         Room:
@@ -72,7 +97,16 @@ export function OnlineGamePage() {
         {' '}
         {roomMate}
       </h2>
-      <button type="button" onClick={handleClick}>Join to room</button>
+      <div>
+        {!eventOccurred && <button type="button" onClick={handleClick}>Join the room</button>}
+      </div>
+      {showModal && (
+      <div className="Countdown overlay">
+        <p>
+          {countdown}
+        </p>
+      </div>
+      )}
       <Typing />
       <Keyboard />
     </div>
