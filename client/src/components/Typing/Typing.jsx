@@ -36,15 +36,15 @@ export function Typing() {
       if (!gameStarted || isHidden) {
         return;
       }
+      dispatch({
+        type: ATYPES.COUNTER_DATA,
+        payload: { data: data.length, rightCount: stats.rightCount },
+      });
       const currentChar = data[currentIndex];
       if (event.type === 'keydown' && event.key === currentChar) {
         setCorrectChars((prevCorrectChars) => [...prevCorrectChars, currentIndex]);
         if (currentIndex === data.length - 1) {
         // первый диспатч нужен чтобы обновить каунтер для прогрессбара в конце сессии
-          dispatch({
-            type: ATYPES.COUNTER_DATA,
-            payload: { data: data.length, rightCount: stats.rightCount },
-          });
           dispatch({ type: ATYPES.IS_HIDDEN, payload: true });
           setStats((prevStats) => ({
             ...prevStats,
@@ -69,6 +69,11 @@ export function Typing() {
             clickCount: prevStats.clickCount + 1,
             rightCount: prevStats.rightCount + 1,
           }));
+          // тут мы обновляем данные для каунтера прогрессбара каждый правильный клик?
+          dispatch({
+            type: ATYPES.COUNTER_DATA,
+            payload: { data: data.length, rightCount: stats.rightCount },
+          });
         }
       } else if (
         currentIndex <= data.length - 1
@@ -83,11 +88,6 @@ export function Typing() {
           ...prevStats,
           clickCount: prevStats.clickCount + 1,
         }));
-        // тут мы обновляем данные для каунтера прогрессбара каждый правильный клик?
-        dispatch({
-          type: ATYPES.COUNTER_DATA,
-          payload: { data: data.length, rightCount: stats.rightCount },
-        });
       } else if (event.key === 'Enter') {
         setCurrentIndex((prevIndex) => {
           const nextIndex = data
