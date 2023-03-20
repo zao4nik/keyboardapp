@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import Stat from './Stat';
 // import { data } from './data';
 import { Signin } from '../Signin/Signin';
-import styles from './MyStatistics.module.css';
+import './MyStatistics.css';
 import Pagination from './Pagination';
 
 export function MyStatistics() {
@@ -57,7 +57,7 @@ export function MyStatistics() {
 
   return isAuth ? (
     <div>
-      <h1 className={styles.myStat}>My Statistics</h1>
+      <h1 className="myStat">My Statistics</h1>
       <Pagination
         statPerPage={statPerPage}
         totalStat={stat.length}

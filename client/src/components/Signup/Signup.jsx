@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ATYPES from '../../store/types';
-import style from './Signup.styles.css';
+import './Signup.css';
 
 export function Signup() {
   const dispatch = useDispatch();
@@ -57,24 +57,9 @@ export function Signup() {
   };
 
   return (
-    <div className="container">
+    <div className="signupContainer">
       <form onSubmit={formSubmitHandler}>
         <h1> Sign Up</h1>
-        <div className="mb-3">
-          <label className="form-label w-100" htmlFor="exampleInputUsername1">
-            <div id="loginText" className="form-text">
-              login
-            </div>
-            <input
-              className="form-control w-100"
-              id="exampleInputLogin1"
-              type="text"
-              name="login"
-              value={userSignup.login}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
         <div className="mb-3">
           <label className="form-label w-100" htmlFor="exampleInputEmail1">
             <div id="emailText" className="form-text">
@@ -87,6 +72,21 @@ export function Signup() {
               name="email"
               aria-describedby="emailHelp"
               value={userSignup.email}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className="mb-3">
+          <label className="form-label w-100" htmlFor="exampleInputUsername1">
+            <div id="loginText" className="form-text">
+              Login
+            </div>
+            <input
+              className="form-control w-100"
+              id="exampleInputLogin1"
+              type="text"
+              name="login"
+              value={userSignup.login}
               onChange={handleChange}
             />
           </label>
@@ -110,7 +110,7 @@ export function Signup() {
             {errorSignup}
           </div>
         </div>
-        <button type="submit" className={style.button74}>
+        <button type="submit" className="signupButton">
           Sign Up
         </button>
         <div id="emailHelp" className="form-text">

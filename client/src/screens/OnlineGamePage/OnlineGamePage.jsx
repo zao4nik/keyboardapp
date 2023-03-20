@@ -57,7 +57,7 @@ export function OnlineGamePage() {
     // * remove join button and add timer here
     socket.on('room_closed', (e) => {
       // где-то тут нужно стартануть таймер для начала игры
-      console.log('=-=->', e);
+      // console.log('=-=->', e);
       if (e) {
         setEventOccurred(true);
         setShowModal(true);
