@@ -5,8 +5,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { useSelector } from 'react-redux';
 import { Signin } from '../Signin/Signin';
 
-import styles from './AddStyles.module.css';
-// import './Add.styles.css';
+import './Add.css';
 
 export default function Add() {
   const isAuth = useSelector((store) => store.isAuth);
@@ -46,20 +45,19 @@ export default function Add() {
     <div id="wrapper">
       <form
         onSubmit={handleSubmit}
-        className={styles.paper}
+        className="paper"
       >
         <label
           htmlFor="ExampleTitleInput"
-          id={styles.margin}
+          id="margin"
         >
           Title:
           <input
-            style={{ borderBottom: '3px solid' }}
             type="text"
             value={title}
             onChange={handleTitleChange}
-            id={styles.title}
-            className={styles.title}
+            id="title"
+            className="title"
           />
         </label>
         <br />
@@ -68,8 +66,8 @@ export default function Add() {
           // className="addContainer"
           value={text}
           onChange={handleTextChange}
-          id={styles.text}
-          className={styles.text}
+          id="text"
+          className="text"
           rows={4}
         />
         {/* </label> */}
