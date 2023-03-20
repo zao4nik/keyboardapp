@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // import jwtDecode from 'jwt-decode';
 import ATYPES from '../../store/types';
+import './Signin.css';
 
 export function Signin() {
   const dispatch = useDispatch();
@@ -78,7 +79,7 @@ export function Signin() {
   // </button>
 
   return (
-    <div className="container">
+    <div className="signinContainer">
       <form
         onSubmit={formSubmitHandler}
       >
@@ -130,7 +131,7 @@ export function Signin() {
         </div>
         <button
           type="submit"
-          className="btn btn-dark"
+          className="btn btn-dark signinButton"
         >
           Sign In
         </button>

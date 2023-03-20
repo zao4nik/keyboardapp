@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-import styles from './MyStatistics.module.css';
+import './MyStatistics.css';
 
 function Pagination({ statPerPage, totalStat, paginate }) {
   const pageNumbers = [];
@@ -21,7 +21,7 @@ function Pagination({ statPerPage, totalStat, paginate }) {
           >
             <button
               type="button"
-              className={styles.pageLink}
+              className="pageLink"
               onClick={() => paginate(number)}
             >
               {number}

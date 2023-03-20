@@ -1,6 +1,6 @@
 const express = require('express');
 const { gameData } = require('../controllers/gameDataControllers');
-const { addText } = require('../controllers/gameController');
+const { addText, getText } = require('../controllers/gameController');
 
 const router = express.Router();
 
@@ -11,5 +11,9 @@ router
 router
   .route('/game_add')
   .post(addText);
+
+  router
+  .route('/game_text')
+  .get(getText);
 
 module.exports = router;

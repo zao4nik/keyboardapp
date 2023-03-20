@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ATYPES from '../../store/types';
-import './Navbar.styles.css';
+import './Navbar.css';
 
 export function Navbar() {
   const isAuth = useSelector((store) => store.isAuth);

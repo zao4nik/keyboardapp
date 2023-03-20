@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import styles from './MyStatistics.module.css';
+import './MyStatistics.css';
 
 function Stat({ data, loading }) {
   if (loading) {
@@ -14,10 +14,10 @@ function Stat({ data, loading }) {
       {data &&
         data.map((item) => (
           <div
-            className={styles.container}
+            className="container"
             key={item.id}
           >
-            <p className={styles.myItem}>
+            <p className="myItem">
               {' '}
               Data: {item.data} | Time Game: {item.timeGame} | Words/Min:{' '}
               {item['words/min']} | Accuracy: {item.accuracy} | Mistakes:{' '}
