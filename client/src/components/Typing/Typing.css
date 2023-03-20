@@ -1,0 +1,39 @@
+.btn-start{
+  margin: 40px;
+}
+.conterbox{
+  text-align: left;
+  border: 2px solid #422800 !important;
+  margin: 40px;
+  width: 500px;
+  height: 200px;
+  border: 3px solid rgb(241, 240, 239);
+  border-radius:8px;
+  background-color: antiquewhite;
+}
+.blinking-cursor {
+    animation: blink 0.8s linear infinite;
+    visibility: visible;
+    color: rgb(7, 2, 11);
+    background-color: LightSkyBlue;
+  }
+  
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  
+  .correct {
+    color: #228B22;
+  }
+  
+  .incorrect {
+    color: rgb(5, 0, 0);
+    background-color:LightPink;
+  }
+  span {
+    color: rgb(3, 0, 0);
+    font-size: 20px;
+    font-weight: bold;
+  }

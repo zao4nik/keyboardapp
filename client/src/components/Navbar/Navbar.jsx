@@ -1,40 +1,132 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import StyledNavbar from './Navbar.styles';
-// import Dropdown from '../Dropdown/Dropdown';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import ATYPES from '../../store/types';
+import './Navbar.css';
 
-export default function Navbar() {
-  const user = useSelector((store) => store.user);
-  console.log(user);
+export function Navbar() {
+  const isAuth = useSelector((store) => store.isAuth);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onSignOut = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/auth/signout', {
+        credentials: 'include',
+      });
+      // eslint-disable-next-line no-unused-vars
+      const result = await response.json();
+      dispatch({ type: ATYPES.SIGN_OUT_USER });
+      navigate('/game_page');
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const routePractice = () => {
+    const path = '/game_page';
+    navigate(path);
+  };
+
+  const routePracticeOnline = () => {
+    const path = '/online_game_page';
+    navigate(path);
+  };
+
+  const routeMyStats = () => {
+    const path = '/stats';
+    navigate(path);
+  };
+
+  const routeSignin = () => {
+    const path = '/auth/signin';
+    navigate(path);
+  };
+
+  const routeSignup = () => {
+    const path = '/auth/signup';
+    navigate(path);
+  };
+
+  const routeAdd = () => {
+    const path = '/game_add';
+    navigate(path);
+  };
 
   return (
-    <StyledNavbar>
-      <Link className="navLinks" to="/">
-        <h2>
-          Play
-        </h2>
-      </Link>
+    <main>
+      {isAuth ? (
+        <div className="navbarContainer">
+          <button
+            onClick={routePractice}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Practice
+          </button>
 
-      {user ? (
-        <Link className="navLinks" to="/stats">
-          <h2>
-            My stats
-          </h2>
-        </Link>
+          <button
+            onClick={routePracticeOnline}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Online Practice
+          </button>
+
+          <button
+            onClick={routeMyStats}
+            type="submit"
+            className="btn btn-dark"
+          >
+            My Stats
+          </button>
+
+          <button
+            onClick={routeAdd}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Add Text
+          </button>
+
+          <button
+            onClick={onSignOut}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Sign out
+          </button>
+        </div>
       ) : (
-        <Link className="navLinks" to="/signup">
-          <h2>
-            Get stats
-          </h2>
-        </Link>
-      )}
+        <div className="navbarContainer">
+          <button
+            onClick={routePractice}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Practice
+          </button>
 
-      <Link className="navLinks" to="/">
-        <h2>
-          I want to practice...
-        </h2>
-      </Link>
-    </StyledNavbar>
+          <button
+            onClick={routeSignup}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Sign Up
+          </button>
+
+          <button
+            onClick={routeSignin}
+            type="submit"
+            className="btn btn-dark"
+          >
+            Sign In
+          </button>
+
+        </div>
+      )}
+    </main>
   );
 }
