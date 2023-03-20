@@ -21,6 +21,7 @@ export function Typing() {
     clickCount: 0,
     timeGame: 0,
   });
+
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleKeyDown = useCallback(async (event) => {
@@ -31,6 +32,11 @@ export function Typing() {
     if (event.type === 'keydown' && event.key === currentChar) {
       setCorrectChars((prevCorrectChars) => [...prevCorrectChars, currentIndex]);
       if (currentIndex === data.length - 1) {
+        // первый диспатч нужен чтобы обновить каунтер для прогрессбара в конце сессии
+        dispatch({
+          type: ATYPES.COUNTER_DATA,
+          payload: { data: data.length, rightCount: stats.rightCount },
+        });
         dispatch({ type: ATYPES.IS_HIDDEN, payload: true });
         setStats((prevStats) => ({
           ...prevStats,
@@ -55,7 +61,13 @@ export function Typing() {
           clickCount: prevStats.clickCount + 1,
           rightCount: prevStats.rightCount + 1,
         }));
+        // тут мы обновляем данные для каунтера прогрессбара каждый правильный клик?
+        dispatch({
+          type: ATYPES.COUNTER_DATA,
+          payload: { data: data.length, rightCount: stats.rightCount },
+        });
       }
+      console.log('=>>>>>>>>>>>>>>>>>', stats.rightCount, data.length);
     } else if (currentIndex <= data.length - 1 && event.key !== 'Shift' && event.key !== 'Enter') {
       setIncorrectChars((prevIncorrectChars) => [...prevIncorrectChars, currentIndex]);
       setStats((prevStats) => ({

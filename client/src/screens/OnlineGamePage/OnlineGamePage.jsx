@@ -21,8 +21,22 @@ export function OnlineGamePage() {
   const [roomMate, setRoomMate] = useState(0);
   // const [roomCount, setRoomCount] = useState(0);
   const roomName = useRef('Waiting to join');
-
+  const [enemyProgressBar, setEnemyProgressBar] = useState({
+    counter_state: 0,
+    counter_end: 0,
+  });
+  console.log('enemyProgressBar', enemyProgressBar);
   const user = useSelector((state) => state.user.email);
+  const progressBar = useSelector((state) => state.counterData);
+
+  useEffect(() => {
+    // тут мы отправляем данные о нашем прогрессе
+    socket.emit('progress_bar', { progressBar, roomName });
+    // тут мы принемаем данные о прогрессе нашего соперника
+    socket.on('progress_bar', (data) => {
+      setEnemyProgressBar(data.progressBar);
+    });
+  }, [progressBar]);
   // отправляем на сокет сервер желание  попасть в комнату
   const handleClick = () => {
     socket.emit('sendUserToRoom', { user });
@@ -85,6 +99,13 @@ export function OnlineGamePage() {
 
   return isAuth ? (
     <div className="overlayBase">
+      <h2>
+        {enemyProgressBar.counter_state }
+        {' '}
+        /
+        {' '}
+        {enemyProgressBar.counter_end }
+      </h2>
       <h2>
         {' '}
         Room:
