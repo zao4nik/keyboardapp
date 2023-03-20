@@ -97,18 +97,14 @@ io.on('connection', (socket) => {
       io.in(room).emit('room_closed', `Комната закрыта для новых подключений ${room}`);
     }
 
+    // получаем данные для прогресс бара и отправляем соседу по комнате
+    socket.on('progress_bar', (data) => {
+      socket.broadcast.to(data.roomName.current).emit('progress_bar', data);
+    });
+
     socket.on('end_game', (data) => {
       console.log(data.roomName.current);
       socket.broadcast.to(data.roomName.current).emit('end_game', 'Game End');
-      // Закрыть комнату и вытолкнуть всех участников из нее
-      // const room = io.of('/').adapter.rooms.get(data.roomName.current);
-      // if (room) {
-      //   for (const socketId of room) {
-      //     // Выталкиваем сокет из комнаты
-      //     io.sockets.sockets.get(socketId).leave(data.roomName.current);
-      //   }
-      //   console.log(`Room ${data.roomName.current} is closed.`);
-      // }
       const closedRoom = io.of('/').adapter.rooms.get(data.roomName.current);
       if (closedRoom) {
         Array.from(closedRoom).forEach((socketId) => {

@@ -8,6 +8,11 @@ const initialState = {
   questions: [],
   isHidden: false,
   isWin: true,
+  counterData: {
+    counter_state: 0,
+    counter_end: 0,
+
+  },
 };
 
 const redusers = (state = initialState, action) => {
@@ -23,6 +28,13 @@ const redusers = (state = initialState, action) => {
 
     case ATYPES.IS_WIN:
       return { ...state, isWin: action.payload };
+
+    case ATYPES.COUNTER_DATA:
+      return {
+        ...state,
+        counterData:
+          { counter_state: action.payload.rightCount + 1, counter_end: action.payload.data },
+      };
 
     default:
       return state;
