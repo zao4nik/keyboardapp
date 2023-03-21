@@ -56,7 +56,7 @@ export function MyStatistics() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return isAuth ? (
-    <div>
+    <div className="statsContainer">
       <h1 className="myStat">My Statistics</h1>
       <Pagination
         statPerPage={statPerPage}
