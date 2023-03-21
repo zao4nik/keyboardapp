@@ -29,7 +29,7 @@ const texts = [
   },
   {
     titile: 'Example 8',
-    data: `function isPalindrome(str) {\nconst reversed = str.split('').reverse().join('');\n  return str === reversed;\n}`,
+    data: `function isPalindrome(str) {\nconst reversed = str.split('').reverse().join('');\nreturn str === reversed;\n}`,
   },
   {
     titile: 'Example 9',
@@ -53,8 +53,7 @@ const texts = [
   },
   {
     titile: 'Example 14',
-    data: `function average(arr) {
-    return arraySum(arr) / arr.length;
+    data: `function average(arr) {\nreturn arraySum(arr) / arr.length;
   }`,
   },
   {

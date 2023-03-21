@@ -90,11 +90,9 @@ export function Typing() {
         }));
       } else if (event.key === 'Enter') {
         setCurrentIndex((prevIndex) => {
-          const nextIndex = data
-            .slice(prevIndex)
-            .findIndex((char) => char === '\n');
-          if (nextIndex !== -1) {
-            return prevIndex + nextIndex + 1;
+          const nextIndex = data.indexOf('\n', prevIndex);
+          if (nextIndex !== -1 && nextIndex === prevIndex) {
+            return nextIndex + 1;
           }
           return prevIndex;
         });
