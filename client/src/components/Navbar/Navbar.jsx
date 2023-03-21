@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ATYPES from '../../store/types';
 import './Navbar.css';
@@ -25,105 +25,69 @@ export function Navbar() {
     }
   };
 
-  const routePractice = () => {
-    const path = '/game_page';
-    navigate(path);
-  };
-
-  const routePracticeOnline = () => {
-    const path = '/online_game_page';
-    navigate(path);
-  };
-
-  const routeMyStats = () => {
-    const path = '/stats';
-    navigate(path);
-  };
-
-  const routeSignin = () => {
-    const path = '/auth/signin';
-    navigate(path);
-  };
-
-  const routeSignup = () => {
-    const path = '/auth/signup';
-    navigate(path);
-  };
-
-  const routeAdd = () => {
-    const path = '/game_add';
-    navigate(path);
-  };
-
   return (
     <main>
       {isAuth ? (
         <div className="navbarContainer">
-          <button
-            onClick={routePractice}
-            type="submit"
-            className="btn btn-dark"
+          <NavLink
+            to="/game_page"
+            className="btnLink btn-dark"
           >
             Practice
-          </button>
+          </NavLink>
 
-          <button
-            onClick={routePracticeOnline}
-            type="submit"
-            className="btn btn-dark"
+          <NavLink
+            to="/online_game_page"
+            className="btnLink btn-dark"
+
           >
             Online Practice
-          </button>
+          </NavLink>
 
-          <button
-            onClick={routeMyStats}
-            type="submit"
-            className="btn btn-dark"
+          <NavLink
+            to="/stats"
+            className="btnLink btn-dark"
           >
             My Stats
-          </button>
+          </NavLink>
 
-          <button
-            onClick={routeAdd}
-            type="submit"
-            className="btn btn-dark"
+          <NavLink
+            to="/game_add"
+            className="btnLink btn-dark"
           >
             Add Text
-          </button>
+          </NavLink>
 
-          <button
+          <NavLink
+            to="/auth/signout"
             onClick={onSignOut}
-            type="submit"
-            className="btn btn-dark"
+            className="btnLink btn-dark"
           >
             Sign out
-          </button>
+          </NavLink>
         </div>
       ) : (
         <div className="navbarContainer">
-          <button
-            onClick={routePractice}
-            type="submit"
-            className="btn btn-dark"
+          <NavLink
+            to="/game_page"
+            className="btnLink btn-dark"
           >
             Practice
-          </button>
+          </NavLink>
 
-          <button
-            onClick={routeSignup}
-            type="submit"
-            className="btn btn-dark"
+          <NavLink
+            to="/auth/signup"
+            className="btnLink btn-dark"
           >
             Sign Up
-          </button>
+          </NavLink>
 
-          <button
-            onClick={routeSignin}
-            type="submit"
-            className="btn btn-dark"
+          <NavLink
+            to="/auth/signin"
+            className="btnLink btn-dark"
           >
             Sign In
-          </button>
+          </NavLink>
 
         </div>
       )}
