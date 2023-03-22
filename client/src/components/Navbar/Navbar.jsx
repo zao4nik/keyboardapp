@@ -49,14 +49,7 @@ export function Navbar() {
             className="btnLink btn-dark"
           >
             My Stats
-          </NavLink>
-
-          <NavLink
-            to="/game_add"
-            className="btnLink btn-dark"
-          >
-            Add Text
-          </NavLink>
+          </button>
 
           <NavLink
             to="/auth/signout"
