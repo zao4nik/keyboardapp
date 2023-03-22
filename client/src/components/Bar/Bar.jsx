@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
 import React from 'react';
 
@@ -9,5 +10,10 @@ export function Bar({ percentOfLose }) {
     (percentOfLose.counter_state / percentOfLose.counter_end) * 100,
   );
 
-  return <ProgressBar completed={percent} width={300} customLabel="  " bgColor="#fbeee0" baseBgColor="#422800" labelColor />;
+  return (
+    <>
+      <h3>Your opponent's progress</h3>
+      <ProgressBar completed={percent} width={300} customLabel="  " bgColor="#fbeee0" baseBgColor="#422800" labelColor />
+    </>
+  );
 }

@@ -123,13 +123,6 @@ export function OnlineGamePage() {
         />
       ) : ' '}
       <h2>
-        {enemyProgressBar.counter_state }
-        {' '}
-        /
-        {' '}
-        {enemyProgressBar.counter_end }
-      </h2>
-      <h2>
         {' '}
         Room:
         {roomName.current}
