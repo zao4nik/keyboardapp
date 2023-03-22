@@ -8,8 +8,9 @@ import './OnlineGamePage.css';
 import ATYPES from '../../store/types';
 
 import {
-  Keyboard, Typing, Bar,
+  Keyboard, Bar,
 } from '../../components';
+import { Typingforonline } from '../../components/Typingforonline/Typingforonline';
 
 const socket = io('http://localhost:4000');
 
@@ -144,7 +145,7 @@ export function OnlineGamePage() {
         </p>
       </div>
       )}
-      <Typing showButton={false} timerDone={timerDone} />
+      <Typingforonline showButton={false} timerDone={timerDone} />
       <Keyboard />
     </div>
   ) : (

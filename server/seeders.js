@@ -53,8 +53,7 @@ const texts = [
   },
   {
     titile: 'Example 14',
-    data: `function average(arr) {\nreturn arraySum(arr) / arr.length;
-  }`,
+    data: `function average(arr) {\nreturn arraySum(arr) / arr.length;`
   },
   {
     titile: 'Example 14',
