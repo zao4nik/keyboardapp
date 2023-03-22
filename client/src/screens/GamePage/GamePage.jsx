@@ -7,7 +7,7 @@ export function GamePage() {
   return (
     <div className="mainconteiner">
       <Portal />
-      <Typing />
+      <Typing showButton />
       <Keyboard />
     </div>
   );

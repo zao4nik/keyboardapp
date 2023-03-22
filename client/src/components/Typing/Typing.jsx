@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
@@ -13,7 +14,7 @@ function getRandomElement(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-export function Typing() {
+export function Typing({ showButton, timerDone }) {
   const dispatch = useDispatch();
   // const [data] = useState(() => 'hda'.split(''));
   const [data, setData] = useState([]);
@@ -90,11 +91,9 @@ export function Typing() {
         }));
       } else if (event.key === 'Enter') {
         setCurrentIndex((prevIndex) => {
-          const nextIndex = data
-            .slice(prevIndex)
-            .findIndex((char) => char === '\n');
-          if (nextIndex !== -1) {
-            return prevIndex + nextIndex + 1;
+          const nextIndex = data.indexOf('\n', prevIndex);
+          if (nextIndex !== -1 && nextIndex === prevIndex) {
+            return nextIndex + 1;
           }
           return prevIndex;
         });
@@ -140,6 +139,12 @@ export function Typing() {
     
   }, []);
 
+  useEffect(() => {
+    if (timerDone) {
+      setGameStarted(true);
+    }
+  }, [timerDone]);
+
   const startGame = useCallback(() => {
     setGameStarted(true);
   }, []);
@@ -172,9 +177,11 @@ export function Typing() {
     if (!gameStarted) {
       return (
         <div>
+          {showButton && (
           <button className="btn-start" type="button" onClick={startGame}>
             Start
           </button>
+          )}
         </div>
       );
     }
