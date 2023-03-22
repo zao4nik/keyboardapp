@@ -114,7 +114,6 @@ io.on('connection', (socket) => {
         console.log(`Room ${data.roomName.current} is closed.`);
       }
     });
-    
   });
 
   // обработчик, который вызывается, когда пользователь отключается от сервера

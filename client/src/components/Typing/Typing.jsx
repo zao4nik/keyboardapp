@@ -136,7 +136,6 @@ export function Typing({ showButton, timerDone }) {
     setGameStarted(false);
     setSeconds(0);
     dispatch({ type: ATYPES.IS_WIN, payload: true });
-    
   }, []);
 
   useEffect(() => {

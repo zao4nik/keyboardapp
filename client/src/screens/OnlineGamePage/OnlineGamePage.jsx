@@ -50,6 +50,10 @@ export function OnlineGamePage() {
       socket.emit('end_game', { isComplete, roomName });
       roomName.current = 'Waiting to join';
       setRoomMate(0);
+      setEnemyProgressBar({
+        counter_state: 1,
+        counter_end: 1,
+      });
     }
   }, [isComplete]);
 
@@ -60,6 +64,10 @@ export function OnlineGamePage() {
       console.log(e);
       roomName.current = 'Waiting to join';
       setRoomMate(0);
+      setEnemyProgressBar({
+        counter_state: 1,
+        counter_end: 1,
+      });
       dispatch({ type: ATYPES.IS_WIN, payload: false });
       dispatch({ type: ATYPES.IS_HIDDEN, payload: true });
     });
@@ -112,7 +120,6 @@ export function OnlineGamePage() {
       {enemyProgressBar.counter_end > 2 ? (
         <Bar
           percentOfLose={enemyProgressBar}
-          setEnemyProgressBar={setEnemyProgressBar}
         />
       ) : ' '}
       <h2>
