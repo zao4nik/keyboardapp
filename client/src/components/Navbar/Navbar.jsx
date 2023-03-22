@@ -50,11 +50,6 @@ export function Navbar() {
     navigate(path);
   };
 
-  const routeAdd = () => {
-    const path = '/game_add';
-    navigate(path);
-  };
-
   return (
     <main>
       {isAuth ? (
@@ -81,14 +76,6 @@ export function Navbar() {
             className="btn btn-dark"
           >
             My Stats
-          </button>
-
-          <button
-            onClick={routeAdd}
-            type="submit"
-            className="btn btn-dark"
-          >
-            Add Text
           </button>
 
           <button

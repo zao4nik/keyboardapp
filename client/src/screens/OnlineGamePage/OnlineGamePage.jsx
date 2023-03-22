@@ -65,6 +65,8 @@ export function OnlineGamePage() {
   const [eventOccurred, setEventOccurred] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [countdown, setCountdown] = useState(3);
+  // eslint-disable-next-line no-unused-vars
+  // const [onlineGameStarted, setOnlineGameStarted] = useState(false);
 
   useEffect(() => {
     // получаем от сервера сообщение о закрытии комнаты
@@ -85,7 +87,12 @@ export function OnlineGamePage() {
     });
   }, [handleClick]);
 
+  const [timerDone, setTimerDone] = useState(false);
+
   useEffect(() => {
+    if (!showModal && countdown === 0) {
+      setTimerDone(true);
+    }
     let timer;
     if (showModal && countdown > 0) {
       timer = setTimeout(() => {
@@ -128,7 +135,7 @@ export function OnlineGamePage() {
         </p>
       </div>
       )}
-      <Typing />
+      <Typing showButton={false} timerDone={timerDone} />
       <Keyboard />
     </div>
   ) : (
