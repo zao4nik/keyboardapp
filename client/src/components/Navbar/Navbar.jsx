@@ -49,7 +49,7 @@ export function Navbar() {
             className="btnLink btn-dark"
           >
             My Stats
-          </button>
+          </NavLink>
 
           <NavLink
             to="/auth/signout"
