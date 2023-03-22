@@ -8,7 +8,7 @@ import './OnlineGamePage.css';
 import ATYPES from '../../store/types';
 
 import {
-  Keyboard, Typing,
+  Keyboard, Typing, Bar,
 } from '../../components';
 
 const socket = io('http://localhost:4000');
@@ -22,12 +22,15 @@ export function OnlineGamePage() {
   // const [roomCount, setRoomCount] = useState(0);
   const roomName = useRef('Waiting to join');
   const [enemyProgressBar, setEnemyProgressBar] = useState({
-    counter_state: 0,
-    counter_end: 0,
+    counter_state: 1,
+    counter_end: 1,
   });
   console.log('enemyProgressBar', enemyProgressBar);
   const user = useSelector((state) => state.user.email);
   const progressBar = useSelector((state) => state.counterData);
+  // const percentOfLose = Math.round(
+  //   (enemyProgressBar.counter_state / enemyProgressBar.counter_end) * 100,
+  // );
 
   useEffect(() => {
     // тут мы отправляем данные о нашем прогрессе
@@ -99,6 +102,12 @@ export function OnlineGamePage() {
 
   return isAuth ? (
     <div className="overlayBase">
+      {enemyProgressBar.counter_end > 2 ? (
+        <Bar
+          percentOfLose={enemyProgressBar}
+          setEnemyProgressBar={setEnemyProgressBar}
+        />
+      ) : ' '}
       <h2>
         {enemyProgressBar.counter_state }
         {' '}

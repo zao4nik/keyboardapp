@@ -137,6 +137,7 @@ export function Typing() {
     setGameStarted(false);
     setSeconds(0);
     dispatch({ type: ATYPES.IS_WIN, payload: true });
+    
   }, []);
 
   const startGame = useCallback(() => {

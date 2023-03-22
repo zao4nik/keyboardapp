@@ -9,8 +9,8 @@ const initialState = {
   isHidden: false,
   isWin: true,
   counterData: {
-    counter_state: 0,
-    counter_end: 0,
+    counter_state: 1,
+    counter_end: 1,
 
   },
 };
