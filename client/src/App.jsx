@@ -16,7 +16,6 @@ import PageNotFound from './components/Page404/Page404';
 
 function App() {
   const dispatch = useDispatch();
-  // console.log('isAuth: ', isAuth);
 
   React.useEffect(() => {
     fetch('http://localhost:3001/auth/userinfo', {
@@ -36,7 +35,7 @@ function App() {
           <Route path="/auth/signout" />
           <Route path="/typing" element={<Typing />} />
           <Route path="/keyboard" element={<Keyboard />} />
-          <Route path="/game_page" element={<GamePage />} />
+          <Route path="/" element={<GamePage />} />
           <Route path="/game_add" element={<Add />} />
           <Route path="/online_game_page" element={<OnlineGamePage />} />
           <Route path="/stats" element={<MyStatistics />} />

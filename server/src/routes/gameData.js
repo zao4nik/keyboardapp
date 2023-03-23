@@ -12,7 +12,7 @@ router
   .route('/game_add')
   .post(addText);
 
-  router
+router
   .route('/game_text')
   .get(getText);
 

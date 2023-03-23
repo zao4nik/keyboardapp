@@ -19,7 +19,7 @@ export function Navbar() {
       // eslint-disable-next-line no-unused-vars
       const result = await response.json();
       dispatch({ type: ATYPES.SIGN_OUT_USER });
-      navigate('/game_page');
+      navigate('/');
     } catch (error) {
       console.log(error.message);
     }
@@ -30,7 +30,7 @@ export function Navbar() {
       {isAuth ? (
         <div className="navbarContainer">
           <NavLink
-            to="/game_page"
+            to="/"
             className="btnLink btn-dark"
           >
             Practice
@@ -62,7 +62,7 @@ export function Navbar() {
       ) : (
         <div className="navbarContainer">
           <NavLink
-            to="/game_page"
+            to="/"
             className="btnLink btn-dark"
           >
             Practice

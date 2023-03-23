@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import io from 'socket.io-client';
 import { Signin } from '../../components/Signin/Signin';
 import './OnlineGamePage.css';
-// import { socket } from '../../socket';
 import ATYPES from '../../store/types';
 
 import {
@@ -19,21 +18,15 @@ export function OnlineGamePage() {
   const dispatch = useDispatch();
   const isAuth = useSelector((store) => store.isAuth);
   const isComplete = useSelector((store) => store.isHidden);
-  // const [isConnected, setIsConnected] = useState(socket.connected);
   const [roomMate, setRoomMate] = useState(0);
-  // const [roomCount, setRoomCount] = useState(0);
   const roomName = useRef('Waiting to join');
   const onReload = useSelector((store) => store.onReload);
   const [enemyProgressBar, setEnemyProgressBar] = useState({
     counter_state: 1,
     counter_end: 1,
   });
-  console.log('enemyProgressBar', enemyProgressBar);
   const user = useSelector((state) => state.user.email);
   const progressBar = useSelector((state) => state.counterData);
-  // const percentOfLose = Math.round(
-  //   (enemyProgressBar.counter_state / enemyProgressBar.counter_end) * 100,
-  // );
 
   useEffect(() => {
     // тут мы отправляем данные о нашем прогрессе
@@ -63,8 +56,7 @@ export function OnlineGamePage() {
   // получаем от сервера сообщение о том что мы проиграли
   // и пытаемся обнулить состояние онлайн игры на стороне клиента
   useEffect(() => {
-    socket.on('end_game', (e) => {
-      console.log(e);
+    socket.on('end_game', () => {
       roomName.current = 'Waiting to join';
       setRoomMate(0);
       setEnemyProgressBar({
@@ -87,7 +79,6 @@ export function OnlineGamePage() {
     // * remove join button and add timer here
     socket.on('room_closed', (e) => {
       // где-то тут нужно стартануть таймер для начала игры
-      console.log('=-=->', e);
       if (e) {
         setEventOccurred(true);
         setShowModal(true);

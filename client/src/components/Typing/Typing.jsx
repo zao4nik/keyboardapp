@@ -154,7 +154,6 @@ export function Typing() {
           throw new TypeError("Oops, we haven't got JSON!");
         }
         const datas = await response.json();
-        console.log('🚀 datas==>', datas);
 
         // Получаем случайный элемент из datas
         const randomData = getRandomElement(datas.filteredDatas);

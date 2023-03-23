@@ -17,7 +17,6 @@ function getElementById(arr, id) {
 
 export function Typingforonline({ showButton, timerDone }) {
   const dispatch = useDispatch();
-  // const [data] = useState(() => 'hda'.split(''));
   const [data, setData] = useState([]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -167,7 +166,6 @@ export function Typingforonline({ showButton, timerDone }) {
           throw new TypeError("Oops, we haven't got JSON!");
         }
         const datas = await response.json();
-        console.log('🚀 datas==>', datas);
 
         // Получаем элемент по идентификатору
         const element = getElementById(datas.filteredDatas, 1);

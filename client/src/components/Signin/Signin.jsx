@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import jwtDecode from 'jwt-decode';
 import ATYPES from '../../store/types';
 import './Signin.css';
 
@@ -12,7 +11,7 @@ export function Signin() {
   const isAuth = useSelector((state) => state.isAuth);
 
   useEffect(() => {
-    if (isAuth) navigate('/game_page');
+    if (isAuth) navigate('/');
   }, [isAuth]);
 
   const [userSignin, setUserSignin] = useState({ email: '', password: '' });
@@ -40,7 +39,6 @@ export function Signin() {
         setAlertClass('alert alert-danger');
       } else {
         const data = await response.json();
-        console.log('dataInSignIn', data);
         const { userId, login, email } = data;
         setAlertClass('alert alert-success');
         setErrorSignin("Well done! You're logged in!");
@@ -51,32 +49,6 @@ export function Signin() {
       console.log('error: ', error);
     }
   };
-
-  // function handleCallbackResponse(response) {
-  //   console.log(`Encoded JWT ID token: ${response.credential}`);
-  //   const userObjectGoogle = jwtDecode(response.credential);
-  //   console.log(userObjectGoogle);
-  // }
-
-  // useEffect(() => {
-  //   /* global google */
-  //   google.accounts.id.initialize({
-  //     client_id: '329145851767-nm1iqp5h5ea23e2n1j7smjeoebl7iq4c.apps.googleusercontent.com',
-  //     callback: handleCallbackResponse,
-  //   });
-
-  //   google.accounts.id.renderButton(
-  //     document.getElementById('signInDiv'),
-  //     { theme: 'standard', size: 'medium' },
-  //   );
-  // }, []);
-
-  //   <button
-  //   type="submit"
-  //   className="btn btn-dark"
-  // >
-  //   <div id="signInDiv" />
-  // </button>
 
   return (
     <div className="signinContainer">

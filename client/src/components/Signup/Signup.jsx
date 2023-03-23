@@ -8,7 +8,6 @@ export function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.isAuth);
-  // console.log('isAuth: ', isAuth);
 
   useEffect(() => {
     if (isAuth) navigate('/');
@@ -45,7 +44,6 @@ export function Signup() {
       } else {
         const data = await response.json();
         const { userId, login, email } = data;
-        console.log('🚀  dataInSignUP==>', data);
         setAlertClass('alert alert-success');
         setErrorSignup("Well done! You're logged in!");
         dispatch({ type: ATYPES.SET_USER, payload: { userId, login, email } });

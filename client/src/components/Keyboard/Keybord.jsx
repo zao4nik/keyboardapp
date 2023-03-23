@@ -192,7 +192,6 @@ function Keyboard() {
 
   function handleKeyDown(event) {
     const key = event.code;
-    console.log('Pressed key:', key);
     setLastKey(key);
 
     if (!isKeyPressed(key)) {

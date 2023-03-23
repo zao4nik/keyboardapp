@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 require('dotenv').config(); //  импорт библиотеки dotenv
 const express = require('express'); // импорт библиотеки express
-const logger = require('morgan');
 const cors = require('cors');
 const session = require('express-session'); // библиотека для работы с сессиями
 const FileStore = require('session-file-store')(session);
@@ -31,7 +30,7 @@ const gameData = require('./routes/gameData');
 const gameStatistics = require('./routes/statistics');
 const addText = require('./routes/gameData');
 
-const { PORT, COOKIE_SECRET } = process.env; // задаем порт в переменную
+const { PORT, COOKIE_SECRET, IO_PORT } = process.env; // задаем порт в переменную
 
 dbConnect();
 
@@ -54,7 +53,6 @@ app.use(cors({
   // allowedHeaders: ['content-type'],
 }));
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session(sessionConfig));
@@ -66,7 +64,7 @@ app.use('/auth', authRouter);
 app.use('/game', gameData);
 app.use('/game_add', addText);
 
-io.listen(4000);
+io.listen(IO_PORT);
 
 io.on('connection', (socket) => {
   // тут мы ловим сообщение от юзера что он хочет в комнату и присылает свои данные
@@ -103,7 +101,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('end_game', (data) => {
-      console.log(data.roomName.current);
       socket.broadcast.to(data.roomName.current).emit('end_game', 'Game End');
       const closedRoom = io.of('/').adapter.rooms.get(data.roomName.current);
       if (closedRoom) {
@@ -111,14 +108,12 @@ io.on('connection', (socket) => {
           // Выталкиваем сокет из комнаты
           io.sockets.sockets.get(socketId).leave(data.roomName.current);
         });
-        console.log(`Room ${data.roomName.current} is closed.`);
       }
     });
   });
 
   // обработчик, который вызывается, когда пользователь отключается от сервера
   socket.on('disconnect', () => {
-    console.log('user disconnected');
   });
 
   socket.on('disconnect', (e) => {
@@ -127,10 +122,6 @@ io.on('connection', (socket) => {
     console.log(e);
   });
 });
-
-// io.on('disconnect',(socket) => {
-//   console.log('disconnect')
-// })
 
 app.use('/stats', gameStatistics);
 

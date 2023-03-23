@@ -1,4 +1,5 @@
 PORT=3000
+IO_PORT=4000
 DATABASE=postgres://name:password@localhost:port/Typing
 COOKIE_SECRET=kslanfdlasjdnf
 GOOGLE_CLIENT_ID=329145851767-nm1iqp5h5ea23e2n1j7smjeoebl7iq4c.apps.googleusercontent.com

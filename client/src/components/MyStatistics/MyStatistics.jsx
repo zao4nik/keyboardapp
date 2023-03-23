@@ -7,7 +7,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Stat from './Stat';
-// import { data } from './data';
 import { Signin } from '../Signin/Signin';
 import './MyStatistics.css';
 import Pagination from './Pagination';
@@ -35,8 +34,6 @@ export function MyStatistics() {
       });
       const allStatistics = await response.json();
 
-      // console.log('statistic ', allStatistics);
-
       const arrayForMap = allStatistics.allStatistics;
 
       const myStata = arrayForMap.map((item) => ({
@@ -47,7 +44,6 @@ export function MyStatistics() {
         accuracy: item.accuracy,
         mistakes: item.mistakeCount,
       }));
-      // console.log('🚀 ~ myStata:', myStata[0].data);
 
       setStat(myStata);
     })();

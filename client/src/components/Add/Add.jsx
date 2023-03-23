@@ -9,11 +9,9 @@ import './Add.css';
 
 export default function Add() {
   const isAuth = useSelector((store) => store.isAuth);
-  // console.log('🚀  isAuth==>', isAuth);
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const userID = useSelector((state) => state?.user?.userId);
-  if (userID) console.log('🚀  userID==>', userID);
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -33,10 +31,7 @@ export default function Add() {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
-
+      .then((response) => response.json());
     setTitle('');
     setText('');
   };
@@ -63,14 +58,12 @@ export default function Add() {
         <br />
 
         <TextareaAutosize
-          // className="addContainer"
           value={text}
           onChange={handleTextChange}
           id="text"
           className="text"
           rows={4}
         />
-        {/* </label> */}
         <br />
         <button type="submit">Add</button>
       </form>

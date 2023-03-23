@@ -9,9 +9,6 @@
 }
 
 .container {
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
   border-radius: 15px;
   background: #fbeee0;
   text-align: center;
@@ -20,12 +17,10 @@
   margin: 50px;
   box-shadow: #422800 10px 10px 0 0;
   color: #422800;
-  /* width: 50%; */
 }
 
 .myItem {
   margin: 50px 40px;
-  /* text-align: center; */
   color: #422800;
 }
 
@@ -33,9 +28,6 @@
   margin: 20px;
 }
 
-/* .pageLink:focus {
-    color: rgb(196, 80, 45);
-} */
 
 .pageLink:focus {
   outline: none;
