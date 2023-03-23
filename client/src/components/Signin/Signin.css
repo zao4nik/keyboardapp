@@ -1,0 +1,22 @@
+.signinContainer {
+    margin: 20px;
+}
+
+h1 {
+    font-size: 40px !important;
+}
+
+#usernameText {
+  font-size: 20px !important;
+  margin-top: 10px;
+}
+
+input {
+    height: 25px;
+    width: 260px;
+    font-size:15px;
+}
+
+.signinButton {
+    margin: 20px !important;
+  }
