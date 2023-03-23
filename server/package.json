@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app.js --ignore sessions --ext js,jsx"
+    "dev": "nodemon src/app.js --ignore sessions --ext js,jsx",
+    "start" : "src/app.js"
     
   },
   "keywords": [],
