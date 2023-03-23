@@ -12,6 +12,11 @@ import { Signin } from '../Signin/Signin';
 import './MyStatistics.css';
 import Pagination from './Pagination';
 
+function parseDate(createdAt) {
+  const date = new Date(Date.parse(createdAt));
+  return date;
+}
+
 export function MyStatistics() {
   const isAuth = useSelector((store) => store.isAuth);
   const [stat, setStat] = useState([]);
@@ -36,8 +41,7 @@ export function MyStatistics() {
 
       const myStata = arrayForMap.map((item) => ({
         id: item.id,
-        data: `${item.createdAt.slice(11, 16)}♦${item.createdAt.slice(0, 10)}`,
-        timeGame: item.timeGame,
+        data: parseDate(item.createdAt).toLocaleString(),
         'words/min': item.wordsPmin,
         accuracy: item.accuracy,
         mistakes: item.mistakeCount,
