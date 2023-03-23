@@ -128,9 +128,6 @@ export function OnlineGamePage() {
     }
   }, [onReload]);
 
-  // console.log('onReload----->', onReload);
-  // console.log('eventOccurred----->', eventOccurred);
-
   return isAuth ? (
     <div className="overlayBase">
       {enemyProgressBar.counter_end > 2 ? (

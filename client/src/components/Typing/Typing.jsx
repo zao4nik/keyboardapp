@@ -214,7 +214,6 @@ export function Typing() {
   return (
     <div>
       {renderGame()}
-      {/* <button type="button" onClick={restartGame}>Restart</button> */}
     </div>
   );
 }
