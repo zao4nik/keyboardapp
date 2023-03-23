@@ -20,7 +20,7 @@ function Stat({ data, loading }) {
             <p className="myItem">
               {' '}
               Data: {item.data} | Time Game: {item.timeGame} | Words/Min:{' '}
-              {item['words/min']} | Accuracy: {item.accuracy} | Mistakes:{' '}
+              {item['words/min']} | Accuracy: {item.accuracy} % | Mistakes:{' '}
               {item.mistakes}
             </p>
           </div>
