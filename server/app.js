@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
-require('dotenv').config(); //  импорт библиотеки dotenv
 const express = require('express'); // импорт библиотеки express
 const cors = require('cors');
 const session = require('express-session'); // библиотека для работы с сессиями
 const FileStore = require('session-file-store')(session);
+require('dotenv').config(); //  импорт библиотеки dotenv
 
 const app = express(); // создаём экземпляр сервера
 // Тут мы создаём сервер для сокетов и сокет сервер
