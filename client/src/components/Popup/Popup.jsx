@@ -16,17 +16,16 @@ export function Popup({ data, onClose, incorrectCount }) {
         <div className="data">
           Right:
           {data.rightCount}
-
+          {' '}
           Wrong:
           {incorrectCount}
-
+          {' '}
           Time:
           {data.timeGame}
-          {' '}
-          seconds
+          sec
 
           Clicks:
-          {data.clickCount}
+          {data.clickCount + 1}
 
         </div>
       </div>

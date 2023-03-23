@@ -42,6 +42,7 @@ export function MyStatistics() {
       const myStata = arrayForMap.map((item) => ({
         id: item.id,
         data: parseDate(item.createdAt).toLocaleString(),
+        timeGame: item.timeGame,
         'words/min': item.wordsPmin,
         accuracy: item.accuracy,
         mistakes: item.mistakeCount,

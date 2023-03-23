@@ -4,7 +4,7 @@ const gameData = async (req, res) => {
   console.log('=>>>>>>>>>>>>>>>>>>>>', req.body);
   const { rightCount, clickCount, timeGame } = req.body;
   const mistakeCount = clickCount - rightCount;
-  const accuracy = Math.round((mistakeCount / clickCount) * 100);
+  const accuracy = Math.round(100 - (mistakeCount / clickCount) * 100);
   const wordsPmin = Math.round((rightCount / timeGame) * 60);
 
   if (req.session.user !== undefined) {

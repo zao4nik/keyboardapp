@@ -27,7 +27,7 @@ export function Typingforonline({ showButton, timerDone }) {
   const [seconds, setSeconds] = useState(0);
   const [stats, setStats] = useState({
     rightCount: 0,
-    clickCount: 1,
+    clickCount: 0,
     timeGame: 0,
   });
 
@@ -132,7 +132,7 @@ export function Typingforonline({ showButton, timerDone }) {
   const restartGame = useCallback(() => {
     setStats({
       rightCount: 0,
-      clickCount: 1,
+      clickCount: 0,
       timeGame: 0,
     });
     setCurrentIndex(0);
