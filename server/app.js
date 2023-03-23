@@ -19,16 +19,16 @@ const io = new Server({
 });
 
 // Импортим проверочную функцию dbConnect
-const dbConnect = require('../db/dbConnect');
+const dbConnect = require('./db/dbConnect');
 
 // Импорт middlewares
-const sessionControl = require('./middlewares/controlSession');
+const sessionControl = require('./src/middlewares/controlSession');
 
 // Импорт роутов:
-const authRouter = require('./routes/auth');
-const gameData = require('./routes/gameData');
-const gameStatistics = require('./routes/statistics');
-const addText = require('./routes/gameData');
+const authRouter = require('./src/routes/auth');
+const gameData = require('./src/routes/gameData');
+const gameStatistics = require('./src/routes/statistics');
+const addText = require('./src/routes/gameData');
 
 const { PORT, COOKIE_SECRET, IO_PORT } = process.env; // задаем порт в переменную
 
