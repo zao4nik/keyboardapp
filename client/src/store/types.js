@@ -4,6 +4,7 @@ const ATYPES = {
   IS_HIDDEN: 'is_hidden',
   IS_WIN: 'is_win',
   COUNTER_DATA: 'counter_data',
+  IS_RELOAD: 'is_reload',
 };
 
 export default ATYPES;

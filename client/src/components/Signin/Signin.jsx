@@ -96,6 +96,7 @@ export function Signin() {
               Email address
             </div>
             <input
+              placeholder="Email..."
               className="form-control"
               id="exampleInputEmail1"
               type="email"
@@ -117,6 +118,7 @@ export function Signin() {
               Password
             </div>
             <input
+              placeholder="Password..."
               className="form-control"
               id="exampleInputPassword1"
               type="password"

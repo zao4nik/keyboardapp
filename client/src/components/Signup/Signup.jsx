@@ -63,9 +63,10 @@ export function Signup() {
         <div className="mb-3">
           <label className="form-label w-100" htmlFor="exampleInputEmail1">
             <div id="emailText" className="form-text">
-              Email address
+              Email
             </div>
             <input
+              placeholder="Email..."
               className="form-control"
               id="exampleInputEmail1"
               type="email"
@@ -82,6 +83,7 @@ export function Signup() {
               Login
             </div>
             <input
+              placeholder="Login..."
               className="form-control w-100"
               id="exampleInputLogin1"
               type="text"
@@ -98,6 +100,7 @@ export function Signup() {
             </div>
 
             <input
+              placeholder="Password..."
               className="form-control mb-3"
               id="exampleInputPassword1"
               type="password"

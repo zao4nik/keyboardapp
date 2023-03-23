@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
@@ -14,7 +15,7 @@ function getElementById(arr, id) {
   return arr.find((element) => element.id === id);
 }
 
-export function Typingforonline() {
+export function Typingforonline({ showButton, timerDone }) {
   const dispatch = useDispatch();
   // const [data] = useState(() => 'hda'.split(''));
   const [data, setData] = useState([]);
@@ -101,6 +102,7 @@ export function Typingforonline() {
     },
     [currentIndex, data, gameStarted, isHidden, seconds],
   );
+
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -123,6 +125,10 @@ export function Typingforonline() {
       clearInterval(timer);
     };
   }, [gameStarted, isHidden]);
+
+  // eslint-disable-next-line no-unused-vars
+  const [statsClose, setStatsClose] = useState(false);
+
   const restartGame = useCallback(() => {
     setStats({
       rightCount: 0,
@@ -136,11 +142,18 @@ export function Typingforonline() {
     setGameStarted(false);
     setSeconds(0);
     dispatch({ type: ATYPES.IS_WIN, payload: true });
+    dispatch({ type: ATYPES.IS_RELOAD, payload: true });
   }, []);
 
   const startGame = useCallback(() => {
     setGameStarted(true);
   }, []);
+
+  useEffect(() => {
+    if (timerDone) {
+      setGameStarted(true);
+    }
+  }, [timerDone]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -170,9 +183,11 @@ export function Typingforonline() {
     if (!gameStarted) {
       return (
         <div>
+          {showButton && (
           <button className="btn-start" type="button" onClick={startGame}>
             Start
           </button>
+          )}
         </div>
       );
     }

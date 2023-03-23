@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -22,6 +23,7 @@ export function OnlineGamePage() {
   const [roomMate, setRoomMate] = useState(0);
   // const [roomCount, setRoomCount] = useState(0);
   const roomName = useRef('Waiting to join');
+  const onReload = useSelector((store) => store.onReload);
   const [enemyProgressBar, setEnemyProgressBar] = useState({
     counter_state: 1,
     counter_end: 1,
@@ -85,7 +87,7 @@ export function OnlineGamePage() {
     // * remove join button and add timer here
     socket.on('room_closed', (e) => {
       // где-то тут нужно стартануть таймер для начала игры
-      // console.log('=-=->', e);
+      console.log('=-=->', e);
       if (e) {
         setEventOccurred(true);
         setShowModal(true);
@@ -104,9 +106,11 @@ export function OnlineGamePage() {
   useEffect(() => {
     if (!showModal && countdown === 0) {
       setTimerDone(true);
+      setCountdown(3);
     }
     let timer;
     if (showModal && countdown > 0) {
+      setTimerDone(false);
       timer = setTimeout(() => {
         setCountdown((prevCountdown) => prevCountdown - 1);
       }, 1000);
@@ -115,6 +119,17 @@ export function OnlineGamePage() {
     }
     return () => clearTimeout(timer);
   }, [showModal, countdown]);
+
+  useEffect(() => {
+    if (onReload) {
+      setEventOccurred(false);
+      dispatch({ type: ATYPES.IS_RELOAD, payload: false });
+      // window.location.reload(true);
+    }
+  }, [onReload]);
+
+  // console.log('onReload----->', onReload);
+  // console.log('eventOccurred----->', eventOccurred);
 
   return isAuth ? (
     <div className="overlayBase">

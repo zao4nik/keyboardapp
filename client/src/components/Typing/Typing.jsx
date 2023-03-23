@@ -14,7 +14,7 @@ function getRandomElement(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-export function Typing({ showButton, timerDone }) {
+export function Typing() {
   const dispatch = useDispatch();
   // const [data] = useState(() => 'hda'.split(''));
   const [data, setData] = useState([]);
@@ -138,12 +138,6 @@ export function Typing({ showButton, timerDone }) {
     dispatch({ type: ATYPES.IS_WIN, payload: true });
   }, []);
 
-  useEffect(() => {
-    if (timerDone) {
-      setGameStarted(true);
-    }
-  }, [timerDone]);
-
   const startGame = useCallback(() => {
     setGameStarted(true);
   }, []);
@@ -176,11 +170,9 @@ export function Typing({ showButton, timerDone }) {
     if (!gameStarted) {
       return (
         <div>
-          {showButton && (
           <button className="btn-start" type="button" onClick={startGame}>
             Start
           </button>
-          )}
         </div>
       );
     }
