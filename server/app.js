@@ -14,7 +14,7 @@ const { Server } = require('socket.io');
 
 const io = new Server({
   cors: {
-    origin: '*',
+    origin: 'https://keyboardapp.netlify.app',
   },
 });
 
@@ -48,7 +48,7 @@ const sessionConfig = {
 };
 
 app.use(cors({
-  origin: '*',
+  origin: 'https://keyboardapp.netlify.app',
   credentials: true,
   // allowedHeaders: ['content-type'],
 }));
