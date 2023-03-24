@@ -23,7 +23,7 @@ export default function Add() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('http://localhost:3001/game/game_add', {
+    fetch('https://keyboarder.onrender.com/game/game_add', {
       credentials: 'include',
       method: 'POST',
       body: JSON.stringify({ title, text, userID }),
