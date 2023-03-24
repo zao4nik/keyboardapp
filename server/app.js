@@ -14,7 +14,7 @@ const { Server } = require('socket.io');
 
 const io = new Server({
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'https://keyboarder.onrender.com/',
   },
 });
 
@@ -48,7 +48,7 @@ const sessionConfig = {
 };
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://keyboarder.onrender.com/',
   credentials: true,
   // allowedHeaders: ['content-type'],
 }));
