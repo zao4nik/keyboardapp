@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express'); // импорт библиотеки express
 const cors = require('cors');
+const http = require('http');
 const session = require('express-session'); // библиотека для работы с сессиями
 const FileStore = require('session-file-store')(session);
 require('dotenv').config(); //  импорт библиотеки dotenv
@@ -12,7 +13,9 @@ const app = express(); // создаём экземпляр сервера
 // const server = http.createServer(app);
 const { Server } = require('socket.io');
 
-const io = new Server({
+const server = http.createServer(app);
+
+const io = new Server(server, {
   cors: {
     origin: 'https://keyboardapp.netlify.app',
   },
@@ -64,7 +67,7 @@ app.use('/auth', authRouter);
 app.use('/game', gameData);
 app.use('/game_add', addText);
 
-io.listen(IO_PORT);
+// io.listen(IO_PORT);
 
 io.on('connection', (socket) => {
   // тут мы ловим сообщение от юзера что он хочет в комнату и присылает свои данные
@@ -125,4 +128,4 @@ io.on('connection', (socket) => {
 
 app.use('/stats', gameStatistics);
 
-app.listen(PORT, () => { console.log(`server started on http://localhost:${PORT}`); }); // - проверяем работает ли сервер
+server.listen(PORT, () => { console.log(`server started on http://localhost:${PORT}`); }); // - проверяем работает ли сервер
