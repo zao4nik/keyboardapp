@@ -43,10 +43,12 @@ const sessionConfig = {
   store: new FileStore({}),
   secret: COOKIE_SECRET ?? 'Секретное слово',
   resave: false,
-  saveUninitialized: false,
+  proxy: true,
+  saveUninitialized: true,
   cookie: {
     maxAge: 9999999,
-    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
   },
 };
 
