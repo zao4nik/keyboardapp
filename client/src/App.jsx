@@ -18,7 +18,7 @@ function App() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    fetch('http://localhost:3001/auth/userinfo', {
+    fetch('https://keyboarder.onrender.com/auth/userinfo', {
       credentials: 'include',
     })
       .then((res) => res.json())

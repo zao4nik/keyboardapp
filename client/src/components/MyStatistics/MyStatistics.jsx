@@ -25,7 +25,7 @@ export function MyStatistics() {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch('http://localhost:3001/stats', {
+      const response = await fetch('https://keyboarder.onrender.com/stats', {
         method: 'GET',
         credentials: 'include', // куки
         headers: {

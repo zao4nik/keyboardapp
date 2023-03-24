@@ -13,7 +13,7 @@ export function Navbar() {
 
   const onSignOut = async () => {
     try {
-      const response = await fetch('http://localhost:3001/auth/signout', {
+      const response = await fetch('https://keyboarder.onrender.com/auth/signout', {
         credentials: 'include',
       });
       // eslint-disable-next-line no-unused-vars

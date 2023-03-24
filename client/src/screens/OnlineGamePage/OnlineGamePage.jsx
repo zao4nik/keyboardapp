@@ -12,7 +12,7 @@ import {
 } from '../../components';
 import { Typingforonline } from '../../components/Typingforonline/Typingforonline';
 
-const socket = io('http://localhost:4000');
+const socket = io('https://keyboarder.onrender.com');
 
 export function OnlineGamePage() {
   const dispatch = useDispatch();

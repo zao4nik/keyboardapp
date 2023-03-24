@@ -30,7 +30,7 @@ export function Signup() {
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/auth/signup ', {
+      const response = await fetch('https://keyboarder.onrender.com/auth/signup ', {
         credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

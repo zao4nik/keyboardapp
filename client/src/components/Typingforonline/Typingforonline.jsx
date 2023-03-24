@@ -54,7 +54,7 @@ export function Typingforonline({ showButton, timerDone }) {
           }));
 
           try {
-            await fetch('http://localhost:3001/game/game_data', {
+            await fetch('https://keyboarder.onrender.com/game/game_data', {
               credentials: 'include',
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -157,7 +157,7 @@ export function Typingforonline({ showButton, timerDone }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/game/game_text');
+        const response = await fetch('https://keyboarder.onrender.com/game/game_text');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
